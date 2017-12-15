@@ -5,62 +5,89 @@
     <title>Lumens by Ryan</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="normalize.css">
-    <link rel="stylesheet" type="text/css" href="skeleton.css">
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
-  <body class="container">
-    <code><h3>Custom, Min & Max</h3>
+  <body class="">
+    <div class="row">
+      <h3 class="col s12 offset-s1">Min/Max & Custom Outputs</h3>
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4 class="customError">Custom <span>Lumens</span> Out of Range</h4>
+          <p class="customError">Be sure the desired <span>lumens</span> are within the min and max!</p>
+          <p class="customError">If it's a bi-directional fixture, the total watts may be above UL.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Got It!</a>
+        </div>
+      </div>
+      <section class="fixtures col s2 offset-s1">
+        <p>1) Select Fixture</p>
+        <article class="row">
+          <div class="linear col s6">
+          </div>
+          <div class="trougher col s6">
+          </div>
+        </article>
+      </section>
+      <section class="shielding col s2">
+        <p>2) Then Shielding</p>
+        <article>
+          <div class="direct">
+            <p>Direct</p>
+          </div>
+          <div class="indirect">
+            <p>Indirect</p>
+          </div>
+        </article>
+      </section>
+      <section class="led col s3">
+        <p>3) Finally Output</p>
+        <article>
+          <div class="cri">
+            <p>CRI</p>
+            <div class="cri hover" data-cri="80">80</div>
+            <div class="cri hover" data-cri="90">90</div>
+          </div>
+          <div class="temp">
+            <p>Color</p>
+            <div class="temp hover" data-temp="27k">27K</div>
+            <div class="temp hover" data-temp="30k">30K</div>
+            <div class="temp hover" data-temp="35k">35K</div>
+            <div class="temp hover" data-temp="40k">40K</div>
+            <div class="temp hover" data-temp="50k">50K</div>
+          </div>
+          <div class="inputSection">
+            <p>Custom Output (optional)</p>
+            <div class="switch">
+              <label class="black-text">
+                Lumens
+                <input id="unitSwitch" class="" type="checkbox">
+                <span class="lever"></span>
+                Watts
+              </label>
+            </div>
+            <div class="input-field customDirect">
+              <label class="directTarget" for="directTarget">Direct Custom Lumens:</label>
+              <input id="directTarget" type="number" class="validate" step="any" min="1">
+            </div>
+            <div class="input-field customIndirect">
+              <label class="indirectTarget" for="indirectTarget">Indirect Custom Lumens:</label>
+              <input id="indirectTarget" type="number" class="validate" step="any" min="1">
+            </div>
+            <button class="clButton">Add CL</button>
+          </div>
+        </article>
+      </section>
+      <section class="outputSection col s4">
+      </section>
 
-    <section class="row">
-      <article class="fixtures four columns">
-        <p>Fixture</p>
-        <div class="row">
-          <div class="linear one-half column">
-          </div>
-          <div class="trougher one-half column">
-          </div>
-        </div>
-      </article>
-      <article class="shielding two columns">
-        <div class="first">
-        </div>
-        <div class="second">
-        </div>
-      </article>
-      <article class="led two columns">
-        <div class="board">
-        </div>
-        <div class="color">
-        </div>
-        <div class="switch">
-          <label class="black-text">
-            Lumens
-            <input id="unitSwitch" class="" type="checkbox">
-            <span class="lever"></span>
-            Watts
-          </label>
-        </div>
-        <div class="input-field customInput">
-          <label class="customTarget" for="customTarget">Custom Lumens (optional):</label>
-          <input id="customTarget" type="number" class="validate" step="any" min="1" placeholder="type here">
-        </div>
-        <div class="input-field customInput2">
-          <label class="customTarget2" for="customTarget2">Custom Lumens (optional):</label>
-          <input id="customTarget2" type="number" class="validate" step="any" min="1">
-        </div>
-        <button class="clButton">Add CL</button>
-      </article>
-      <article class="output four columns">
-      </article>
-    </section></code>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://fastcdn.org/Papa-Parse/4.1.2/papaparse.min.js"></script>
 
     <script type="text/javascript" src="csvStrings.js"></script>
-    <script type="text/javascript" src="boardCount.js"></script>
     <script type="text/javascript" src="lumenData.js"></script>
     <script type="text/javascript" src="nonLumenData.js"></script>
     <script type="text/javascript" src="calculations.js"></script>

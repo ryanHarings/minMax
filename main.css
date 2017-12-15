@@ -1,46 +1,31 @@
 /*main look*/
 
-body {
-  background-color: white;
-  color: #black;
-}
-
-code {
-  background-color: white;
-  border: 1px solid white;
-
-}
-
-.fixtures, .shielding, .led, .output {
+.fixtures, .shielding, .led {
   border-left: 3px solid black;
-  padding: 15px;
+  /*padding: 15px;*/
 }
 
-article > p:first-child, div > p:first-child {
-  border-bottom: 1px solid black;
+section > p {
+  font-weight: bold;
+}
+
+.fixtures > article, .shielding > article, .led > article {
+  padding-left: 15px;
+}
+
+.outputSection {
+  border-left: 6px solid black;
+}
+
+p {
+  border-bottom: 2px solid black;
   padding-bottom: 10px;
-}
-
-.color, .shielding > .second, .switch {
-  padding-top: 30px;
-}
-
-.switch {
-  padding-bottom: 5px;
 }
 
 button {
   background-color: white;
   color: #black;
   border-color: black;
-}
-
-.outputCard {
-  /*background-color: grey;*/
-}
-
-.customProg, .altCustomMessage, .altCustomProg {
-  padding-left: 122px;
 }
 
 /*style and animate CSS*/
@@ -81,12 +66,30 @@ button:hover {
 .selected {
   background-color: black;
   color: white;
+  border-radius: 5px;
 }
 
 .outputCard {
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
+  padding-bottom: 15px;
 }
 
+article.outputCard > div.catolog {
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+article.outputCard > div > span {
+  font-weight: bold;
+}
+
+.directMin, .indirectMin {
+  border-bottom: 1px solid black;
+}
+
+.remove, .catolog {
+  margin-top: 10px;
+}
 /* materialize styling */
 
   /* label color */

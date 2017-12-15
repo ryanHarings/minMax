@@ -9,8 +9,7 @@ const ulW = {
   EX1B: 36,
   EX12: 18,
   EVL: 10,
-  EX33: 12.5,
-  EX44: 12.5,
+  EXXX: 12.5,
   L6: 25,
   F14: 25,
   F18: 36,
@@ -19,341 +18,711 @@ const ulW = {
   F48: 249,
   F60: 251,
   F72: 380,
-  AD11: 25, //roughly
-  AD22: 48,
-  AD14: 80,
-  AD24: 80,
-  CJ11: 25, //roughly
-  CJ22: 48,
-  CJ14: 80,
-  CJ24: 80,
-  LU11: 25, //roughly
-  LU22: 48,
-  LU14: 80,
-  LU24: 80,
-  LF11: 20,
-  LF12: 30,
-  LF22: 60,
-  LF14: 60,
-  LF24: 120,
-  LF44: 140
+  TRO11: 25, //roughly
+  TRO22: 48,
+  TRO14: 80,
+  TRO24: 80,
+  ARE11: 20,
+  ARE12: 30,
+  ARE22: 60,
+  ARE14: 60,
+  ARE24: 120,
+  ARE44: 140
 }
 
-const fixEff = {
+const fixBoardCounts = {
+  TRO11: 2,
+  TRO14: 2,
+  TRO22: 1,
+  TRO24: 2,
+  F14: 3,
+  F18: 4,
+  F24B_DIR: 8,
+  F24B_IND: 4,
+  F36B_DIR: 20,
+  F36B_IND: 8,
+  F48B_DIR: 42,
+  F48B_IND: 16,
+  F60: 56,
+  F72: 80,
+  LF11: 1,
+  LF12: 2,
+  LF14: 4,
+  LF22: 4,
+  LF24: 8,
+  LF44: 16
+};
+
+const fixtures = {
   LIN: {
-    E2: {A:	0.5365},
-    E4: {A:	0.6110},
+    E2: {
+      shielding: {
+        A:	0.5365
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
+    },
+    E4: {
+      shielding: {
+        A:	0.6110
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
+    },
     ET4: {
-      A: 0.545,
-      AL: 0.6547,
-      C: 0.524,
-      CG: 0.508,
-      CL: 0.455,
-      CM: 0.465,
-      CR: 0.434,
-      D: 0.603,
-      DG: 0.586,
-      DL: 0.529,
-      DM: 0.54,
-      DR: 0.51,
-      H: 0.4815,
-      HE: 0.6441,
-      R: 0.5779,
-      V: 0.5749
+      shielding: {
+        A: 0.545,
+        AL: 0.6547,
+        C: 0.524,
+        CG: 0.508,
+        CL: 0.455,
+        CM: 0.465,
+        CR: 0.434,
+        D: 0.603,
+        DG: 0.586,
+        DL: 0.529,
+        DM: 0.54,
+        DR: 0.51,
+        H: 0.4815,
+        HE: 0.6441,
+        R: 0.5779,
+        V: 0.5749
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
     },
     ET6: {
-      A: 0.6689,
-      AL: 0.7664,
-      C: 0.646,
-      CG: 0.628,
-      CL: 0.562,
-      CM: 0.577,
-      CR: 0.516,
-      D: 0.721,
-      DG: 0.704,
-      DL: 0.636,
-      DM: 0.652,
-      DR: 0.594,
-      V: 0.6497,
-      R: 0.6689
+      shielding: {
+        A: 0.6689,
+        AL: 0.7664,
+        C: 0.646,
+        CG: 0.628,
+        CL: 0.562,
+        CM: 0.577,
+        CR: 0.516,
+        D: 0.721,
+        DG: 0.704,
+        DL: 0.636,
+        DM: 0.652,
+        DR: 0.594,
+        V: 0.6497,
+        R: 0.6689
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
     },
     EV1: {
-      A: 0.5284,
-      HE: 0.6245,
-      HED: 0.5721,
-      BW: 0.4956,
-      P: 0.4138,
-      WHE: 0.5541
+      shielding: {
+        A: 0.5284,
+        HE: 0.6245,
+        HED: 0.5721,
+        BW: 0.4956,
+        P: 0.4138,
+        WHE: 0.5541
+      },
+      ulLimit: ulW.E1,
+      boardID: 1 //bar,line,area
     },
     EV3: {
-      A: 0.545,
-      AL: 0.6547,
-      C: 0.524,
-      CG: 0.508,
-      CL: 0.455,
-      CM: 0.465,
-      CR: 0.434,
-      D: 0.603,
-      DG: 0.586,
-      DL: 0.529,
-      DM: 0.54,
-      DR: 0.51,
-      H: 0.4815,
-      HE: 0.6441,
-      R: 0.5779,
-      V: 0.5749,
-      WG: 0.43,
-      WW: 0.4613,
-      WET: 0.5234
+      shielding: {
+        A: 0.545,
+        AL: 0.6547,
+        C: 0.524,
+        CG: 0.508,
+        CL: 0.455,
+        CM: 0.465,
+        CR: 0.434,
+        D: 0.603,
+        DG: 0.586,
+        DL: 0.529,
+        DM: 0.54,
+        DR: 0.51,
+        H: 0.4815,
+        HE: 0.6441,
+        R: 0.5779,
+        V: 0.5749,
+        WG: 0.43,
+        WW: 0.4613,
+        WET: 0.5234
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
     },
     EV6: {
-      A: 0.6689,
-      AL: 0.7664,
-      C: 0.646,
-      CG: 0.628,
-      CL: 0.562,
-      CM: 0.577,
-      CR: 0.516,
-      D: 0.721,
-      DG: 0.704,
-      DL: 0.636,
-      DM: 0.652,
-      DR: 0.594,
-      R: 0.6689,
-      V: 0.6497,
-      WET: 0.5995
+      shielding: {
+        A: 0.6689,
+        AL: 0.7664,
+        C: 0.646,
+        CG: 0.628,
+        CL: 0.562,
+        CM: 0.577,
+        CR: 0.516,
+        D: 0.721,
+        DG: 0.704,
+        DL: 0.636,
+        DM: 0.652,
+        DR: 0.594,
+        R: 0.6689,
+        V: 0.6497,
+        WET: 0.5995
+      },
+      ulLimit: ulW.EV,
+      boardID: 1 //bar,line,area
     },
-    EVL: {NA: 0.4525},
+    EVL: {
+      shielding: {
+        NA: 0.4525
+      },
+      ulLimit: ulW.EVL,
+      boardID: 1 //bar,line,area
+    },
     EX1: {
-      HE: 0.6245,
-      HED: 0.5721,
-      BW: 0.4956,
-      P: 0.4138,
-      WHE: 0.5541
+      shielding: {
+        HE: 0.6245,
+        HED: 0.5721,
+        BW: 0.4956,
+        P: 0.4138,
+        WHE: 0.5541
+      },
+      ulLimit: ulW.E1,
+      boardID: 1 //bar,line,area
     },
     EX12: {
-      HE: 0.6245,
-      HED: 0.5721,
-      BW: 0.4956,
-      P: 0.4138,
-      WHE: 0.5541
+      shielding: {
+        DIR: {
+          HE: 0.6245,
+          HED: 0.5721,
+          BW: 0.4956,
+          P: 0.4138,
+          WHE: 0.5541
+        },
+        IND : {
+          HE: 0.7417,
+          HEA: 0.6785,
+          BW: 0.733,
+          WHE: 0.5112
+        }
+      },
+      ulLimit: ulW.EX12,
+      boardID: 1 //bar,line,area
     },
-    EX12_IND: {
-      HE: 0.7417,
-      HEA: 0.6785,
-      BW: 0.733,
-      WHE: 0.5112
-    },
-    EX1B_DIR: {
-      HE: 0.5818,
-      HED: 0.575,
-      BW: 0.4488,
-      WHE: 0.5302,
-      P: 0.4138
-    },
-    EX1B_IND: {
-      HE: 0.7143,
-      HEA: 0.6785,
-      BW: 0.897,
-      WHE: 0.5112
+    EX1B: {
+      shielding: {
+        DIR: {
+          HE: 0.5818,
+          HED: 0.575,
+          BW: 0.4488,
+          WHE: 0.5302,
+          P: 0.4138
+        },
+        IND: {
+          HE: 0.7143,
+          HEA: 0.6785,
+          BW: 0.897,
+          WHE: 0.5112
+        }
+      },
+      ulLimit: ulW.EX1B,
+      boardID: 1 //bar,line,area
     },
     EX2: {
-      A: 0.5365,
-      O: 0.8092
+      shielding: {
+        DIR: {
+          A: 0.5365
+        },
+        IND: {
+          O: 0.8092
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
     },
-    EX2B_DIR: {A: 0.4745},
-    EX2B_IND: {O: 0.8373},
+    EX2B: {
+      shielding: {
+        DIR: {
+          A: 0.4745
+        },
+        IND: {
+          O: 0.8373
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
+    },
     EX3: {
-      A: 0.545,
-      AL: 0.6547,
-      C: 0.524,
-      CG: 0.508,
-      CL: 0.455,
-      CM: 0.465,
-      CR: 0.434,
-      D: 0.603,
-      DG: 0.586,
-      DL: 0.529,
-      DM: 0.54,
-      DR: 0.51,
-      H: 0.4815,
-      HE: 0.6441,
-      R: 0.5779,
-      V: 0.5749,
-      WW: 0.4613,
-      WET: 0.5234
+      shielding: {
+        A: 0.545,
+        AL: 0.6547,
+        C: 0.524,
+        CG: 0.508,
+        CL: 0.455,
+        CM: 0.465,
+        CR: 0.434,
+        D: 0.603,
+        DG: 0.586,
+        DL: 0.529,
+        DM: 0.54,
+        DR: 0.51,
+        H: 0.4815,
+        HE: 0.6441,
+        R: 0.5779,
+        V: 0.5749,
+        WW: 0.4613,
+        WET: 0.5234
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
     },
-    EX33: {
-      A: 0.545,
-      O: 0.8578
+    EX3B: {
+      shielding: {
+        DIR: {
+          A: 0.5854,
+          AL: 0.6547,
+          C: 0.524,
+          CG: 0.508,
+          CL: 0.455,
+          CM: 0.465,
+          CR: 0.434,
+          D: 0.603,
+          DG: 0.586,
+          DL: 0.529,
+          DM: 0.54,
+          DR: 0.51,
+          H: 0.4815,
+          HE: 0.685,
+          R: 0.5779,
+          V: 0.5749,
+          WW: 0.4613,
+          WET: 0.5064
+        },
+        IND: {
+          O: 0.8842,
+          WET: 0.8638
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
     },
-    EX3B_DIR: {
-      A: 0.5854,
-      AL: 0.6547,
-      C: 0.524,
-      CG: 0.508,
-      CL: 0.455,
-      CM: 0.465,
-      CR: 0.434,
-      D: 0.603,
-      DG: 0.586,
-      DL: 0.529,
-      DM: 0.54,
-      DR: 0.51,
-      H: 0.4815,
-      HE: 0.685,
-      R: 0.5779,
-      V: 0.5749,
-      WW: 0.4613,
-      WET: 0.5064
+    EV3D: {
+      shielding: {
+        A: 0.634,
+        AL: 0.900,
+        HE: 0.740,
+        WHE: 0.694,
+        BW: 0.727,
+        P: 0.400,
+        H: 0.545,
+        R: 0.480
+      },
+      ulLimit: ulW.EV,
+      boardID: 4 //line2
     },
-    EX3B_IND: {
-      O: 0.8842,
-      WET: 0.8638
+    "EX3D/I": {
+      shielding: {
+        DIR: {
+          A: 0.634,
+          AL: 0.882,
+          HE: 0.716,
+          HED: 0.604,
+          WHE: 0.658,
+          BW: 0.676
+        },
+        IND: {
+          HE: 0.882,
+          HEA: 0.895,
+          WHE: 0.680,
+          BW: 0.845
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 4 //line2
     },
     EX4: {
-      A: 0.5731,
-      O: 0.8865
+      shielding: {
+        DIR: {
+          A: 0.5731
+        },
+        IND: {
+          O: 0.8865
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
+    },
+    EX33: {
+      shielding: {
+        DIR: {
+          A: 0.545
+        },
+        IND: {
+          O: 0.8578
+        }
+      },
+      ulLimit: ulW.EXXX,
+      boardID: 1 //bar,line,area
     },
     EX44: {
-      A: 0.5731,
-      O: 0.8865
+      shielding: {
+        DIR: {
+          A: 0.5731
+        },
+        IND: {
+          O: 0.8865
+        }
+      },
+      ulLimit: ulW.EXXX,
+      boardID: 1 //bar,line,area
     },
-    EX4B_DIR: {A: 0.5742},
-    EX4B_IND: {O: 0.8943},
+    EX4B: {
+      shielding: {
+        DIR: {
+          A: 0.5742
+        },
+        IND: {
+          O: 0.8943
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
+    },
     EX6: {
-      A: 0.6886,
-      AL: 0.7664,
-      C: 0.646,
-      CG: 0.628,
-      CL: 0.562,
-      CM: 0.577,
-      CR: 0.516,
-      D: 0.721,
-      DG: 0.704,
-      DL: 0.636,
-      DM: 0.652,
-      DR: 0.594,
-      R: 0.6689,
-      V: 0.6497,
-      WET: 0.5995
+      shielding: {
+        A: 0.6886,
+        AL: 0.7664,
+        C: 0.646,
+        CG: 0.628,
+        CL: 0.562,
+        CM: 0.577,
+        CR: 0.516,
+        D: 0.721,
+        DG: 0.704,
+        DL: 0.636,
+        DM: 0.652,
+        DR: 0.594,
+        R: 0.6689,
+        V: 0.6497,
+        WET: 0.5995
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
     },
-    EX6B_DIR: {
-      A: 0.6924,
-      AL: 0.7664,
-      CR: 0.646,
-      CG: 0.628,
-      CL: 0.562,
-      CM: 0.577,
-      CR: 0.516,
-      D: 0.721,
-      DG: 0.704,
-      DL: 0.636,
-      DM: 0.652,
-      DR: 0.594,
-      R: 0.6689,
-      V: 0.6497,
-      WET: 0.5922
+    EX6B: {
+      shielding: {
+        DIR: {
+          A: 0.6924,
+          AL: 0.7664,
+          CR: 0.646,
+          CG: 0.628,
+          CL: 0.562,
+          CM: 0.577,
+          CR: 0.516,
+          D: 0.721,
+          DG: 0.704,
+          DL: 0.636,
+          DM: 0.652,
+          DR: 0.594,
+          R: 0.6689,
+          V: 0.6497,
+          WET: 0.5922
+        },
+        IND: {
+          O: 0.9205,
+          WET: 0.9371
+        }
+      },
+      ulLimit: ulW.EX,
+      boardID: 1 //bar,line,area
     },
-    EX6B_IND: {
-      O: 0.9205,
-      WET: 0.9371
-    },
-    L6A100: {NA: 0.6778},
-    L6A35: {NA: 0.6726},
-    L6A75: {NA: 0.7608}
+    L6A: {
+      shielding: {
+        "100": 0.6778,
+        "75": 0.7608,
+        "35": 0.6726
+      },
+      ulLimit: ulW.L6,
+      boardID: {
+        "100": 1, //bar,line,area
+        "75": 1,
+        "35": 2 //line22
+      }
+    }
   },
   TRO: {
-    AD11:{
-      A: 0.6901,
-      L: 0.4099,
-      R: 0.3506
+    AD11: {
+      shielding: {
+        A: 0.6901,
+        L: 0.4099,
+        R: 0.3506
+      },
+      ulLimit: ulW.TRO11,
+      boardCount: fixBoardCounts.TRO11,
+      boardID: 1 //bar,line,area
     },
     AD14: {
-      A: 0.8223,
-      L: 0.4884,
-      R: 0.4177
+      shielding: {
+        A: 0.8223,
+        L: 0.4884,
+        R: 0.4177
+      },
+      ulLimit: ulW.TRO14,
+      boardCount: fixBoardCounts.TRO14,
+      boardID: 3 //bar22
     },
     AD22: {
-      A: 0.8196,
-      L: 0.4868,
-      R: 0.4164
+      shielding: {
+        A: 0.8196,
+        L: 0.4868,
+        R: 0.4164
+      },
+      ulLimit: ulW.TRO22,
+      boardCount: fixBoardCounts.TRO22,
+      boardID: 3 //bar22
     },
     AD24: {
-      A: 0.8385,
-      L: 0.4981,
-      R: 0.4260
+      shielding: {
+        A: 0.8385,
+        L: 0.4981,
+        R: 0.4260
+      },
+      ulLimit: ulW.TRO24,
+      boardCount: fixBoardCounts.TRO24,
+      boardID: 3 //bar22
     },
     CJ11: {
-      A: 0.642,
-      L: 0.6089,
-      R: 0.6089
+      shielding: {
+        A: 0.642,
+        L: 0.6089,
+        R: 0.6089
+      },
+      ulLimit: ulW.TRO11,
+      boardCount: fixBoardCounts.TRO11,
+      boardID: 1 //bar,line,area
     },
     CJ14: {
-      A: 0.7556,
-      L: 0.7324,
-      R: 0.7324
+      shielding: {
+        A: 0.7556,
+        L: 0.7324,
+        R: 0.7324
+      },
+      ulLimit: ulW.TRO14,
+      boardCount: fixBoardCounts.TRO14,
+      boardID: 3 //bar22
     },
     CJ22: {
-      A: 0.7603,
-      L: 0.7643,
-      R: 0.7643
+      shielding: {
+        A: 0.7603,
+        L: 0.7643,
+        R: 0.7643
+      },
+      ulLimit: ulW.TRO22,
+      boardCount: fixBoardCounts.TRO22,
+      boardID: 3 //bar22
     },
     CJ24: {
-      A: 0.7879,
-      L: 0.7916,
-      R: 0.7916
+      shielding: {
+        A: 0.7879,
+        L: 0.7916,
+        R: 0.7916
+      },
+      ulLimit: ulW.TRO24,
+      boardCount: fixBoardCounts.TRO24,
+      boardID: 3 //bar22
     },
-    F14: {A: 0.5725},
-    F18: {
-      A: 0.6325,
-      U: 0.6425
-    },
-    F24: {
-      A: 0.5988,
-      U: 0.645
-    },
-    F24B_DIR: {A: 0.63},
-    F24B_IND: {A: 0.6075},
-    F36: {
-      A: 0.6175,
-      U: 0.6263
-    },
-    F36B_DIR: {A: 0.6325},
-    F36B_IND: {A: 0.615},
-    F48: {
-      A: 0.5963,
-      U: 0.6175
-    },
-    F48B_DIR: {A: 0.6175},
-    F48B_IND: {A: 0.6125},
-    F60: {A: 0.731},
-    F72: {A: 0.71},
-    LF11: {A: 0.6131},
-    LF12: {A: 0.6582},
-    LF14: {A: 0.677},
-    LF22: {A: 0.7004},
-    LF24: {A: 0.7125},
-    LF44: {A: 0.6702},
     LU11: {
-      A: 0.6409,
-      S: 0.5460,
-      W: 0.5775
+      shielding: {
+        A: 0.6409,
+        S: 0.5460,
+        W: 0.5775
+      },
+      ulLimit: ulW.TRO11,
+      boardCount: fixBoardCounts.TRO11,
+      boardID: 1 //bar,line,area
     },
     LU14: {
-      A: 0.7709,
-      S: 0.6568,
-      W: 0.6946
+      shielding: {
+        A: 0.7709,
+        S: 0.6568,
+        W: 0.6946
+      },
+      ulLimit: ulW.TRO14,
+      boardCount: fixBoardCounts.TRO14,
+      boardID: 3 //bar22
     },
     LU22: {
-      A: 0.8045,
-      S: 0.6854,
-      W: 0.7249
+      shielding: {
+        A: 0.8045,
+        S: 0.6854,
+        W: 0.7249
+      },
+      ulLimit: ulW.TRO22,
+      boardCount: fixBoardCounts.TRO22,
+      boardID: 3 //bar22
     },
     LU24: {
-      A: 0.8333,
-      S: 0.7100,
-      W: 0.7508
+      shielding: {
+        A: 0.8333,
+        S: 0.7100,
+        W: 0.7508
+      },
+      ulLimit: ulW.TRO24,
+      boardCount: fixBoardCounts.TRO24,
+      boardID: 3 //bar22
+    },
+    F14: {
+      shielding: {
+        A: 0.5725
+      },
+      ulLimit: ulW.F14,
+      boardCount: fixBoardCounts.F14,
+      boardID: 1 //bar,line,area
+    },
+    F18: {
+      shielding: {
+        A: 0.6325,
+        U: 0.6425
+      },
+      ulLimit: ulW.F18,
+      boardCount: fixBoardCounts.F18,
+      boardID: 1 //bar,line,area
+    },
+    F24: {
+      shielding: {
+        A: 0.5988,
+        U: 0.645
+      },
+      ulLimit: ulW.F24,
+      boardCount: fixBoardCounts.F24B_DIR,
+      boardID: 1 //bar,line,area
+    },
+    F24B: {
+      shielding: {
+        DIR: {
+          A: 0.63
+        },
+        IND: {
+          A: 0.6075
+        }
+      },
+      ulLimit: ulW.F24,
+      boardCount: {
+        DIR: fixBoardCounts.F24B_DIR,
+        IND: fixBoardCounts.F24B_IND
+      },
+      boardID: 1 //bar,line,area
+    },
+    F36: {
+      shielding: {
+        A: 0.6175,
+        U: 0.6263
+      },
+      ulLimit: ulW.F36,
+      boardCount: fixBoardCounts.F36B_DIR,
+      boardID: 1 //bar,line,area
+    },
+    F36B: {
+      shielding: {
+        DIR: {
+          A: 0.6325
+        },
+        IND: {
+          A: 0.615
+        }
+      },
+      ulLimit: ulW.F36,
+      boardCount: {
+        DIR: fixBoardCounts.F36B_DIR,
+        IND: fixBoardCounts.F36B_IND
+      },
+      boardID: 1 //bar,line,area
+    },
+    F48: {
+      shielding: {
+        A: 0.5963,
+        U: 0.6175
+      },
+      ulLimit: ulW.F48,
+      boardCount: fixBoardCounts.F48B_DIR,
+      boardID: 1 //bar,line,area
+    },
+    F48B: {
+      shielding: {
+        DIR: {
+          A: 0.6175
+        },
+        IND: {
+          A: 0.6125
+        }
+      },
+      ulLimit: ulW.F48,
+      boardCount: {
+        DIR: fixBoardCounts.F48B_DIR,
+        IND: fixBoardCounts.F48B_IND
+      },
+      boardID: 1 //bar,line,area
+    },
+    F60: {
+      shielding: {
+        A: 0.731
+      },
+      ulLimit: ulW.F60,
+      boardCount: fixBoardCounts.F60,
+      boardID: 1 //bar,line,area
+    },
+    F72: {
+      shielding: {
+        A: 0.71
+      },
+      ulLimit: ulW.F72,
+      boardCount: fixBoardCounts.F72,
+      boardID: 1 //bar,line,area
+    },
+    LF11: {
+      shielding: {
+        A: 0.6131
+      },
+      ulLimit: ulW.ARE11,
+      boardCount: fixBoardCounts.LF11,
+      boardID: 1 //bar,line,area
+    },
+    LF12: {
+      shielding: {
+        A: 0.6582
+      },
+      ulLimit: ulW.ARE12,
+      boardCount: fixBoardCounts.LF12,
+      boardID: 1 //bar,line,area
+    },
+    LF14: {
+      shielding: {
+        A: 0.677
+      },
+      ulLimit: ulW.ARE14,
+      boardCount: fixBoardCounts.LF14,
+      boardID: 1 //bar,line,area
+    },
+    LF22: {
+      shielding: {
+        A: 0.7004
+      },
+      ulLimit: ulW.ARE22,
+      boardCount: fixBoardCounts.LF22,
+      boardID: 1 //bar,line,area
+    },
+    LF24: {
+      shielding: {
+        A: 0.7125
+      },
+      ulLimit: ulW.ARE24,
+      boardCount: fixBoardCounts.LF24,
+      boardID: 1 //bar,line,area
+    },
+    LF44: {
+      shielding: {
+        A: 0.6702
+      },
+      ulLimit: ulW.ARE44,
+      boardCount: fixBoardCounts.LF44,
+      boardID: 1 //bar,line,area
     }
   }
 };
