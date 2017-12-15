@@ -4,10 +4,6 @@ function createList(effObject) {
   $('.led > article > .temp').hide();
   $('.led > article > .inputSection').hide();
 
-
-  // $('.switch').hide();
-  // $('.input-field').hide();
-  // $('.clButton').hide();
   Object.keys(effObject).forEach(function(key) {
     Object.keys(effObject[key]).forEach(function(fixt) {
       var fixtFamily = key === "LIN" ? '.linear' : '.trougher';
@@ -34,16 +30,6 @@ $('.fixture').click(function(){
   $('.led > article > .temp').hide();
   $('.led > article > .inputSection').hide();
 
-  // selection.customUnit = $("#unitSwitch").prop("checked") === true ? 'Watts' : 'Lumens';
-  // $('.switch').hide();
-  // $('.input-field').hide();
-  // $('.clButton').hide();
-  // $('.shielding > .second').empty();
-  // $('.shielding > p').empty();
-  // $('.board').empty();
-  // $('.color').empty();
-
-
   selection.family = $(this).attr('data-family');
   selection.fixture = $(this).attr('id');
 
@@ -62,19 +48,7 @@ $('.fixture').click(function(){
 });
 
 $('.shielding > article').on('click','div > .lens',function() {
-  // document.getElementById("unitSwitch").checked = false;
-  //   // $('#customTarget').val([]);
-  //   // $('.switch').hide();
-  //   // $('.input-field').hide();
-  //   // $('.clButton').hide();
-  //   // $('.board').empty();
-  //   // $('.color').empty();
-  //   // $(this).siblings().removeClass('selected');
-  //   // $('.altLens').removeClass('selected');
-  //   // $(this).addClass('selected');
 
-  // $('.led > article > .cri').find('*').not('p').show();
-  // $('.led').find('*').not('p').hide();
   $(this).siblings().removeClass('selected');
   $(this).addClass('selected');
   $('.cri > div').removeClass('selected');
@@ -92,8 +66,6 @@ $('.shielding > article').on('click','div > .lens',function() {
   selection.boardID = typeof fixtures[selection.family][selection.fixture].boardID === 'object' ? fixtures[selection.family][selection.fixture].boardID[selection.directShielding] : fixtures[selection.family][selection.fixture].boardID;
   selection.ulW = Number(fixtures[selection.family][selection.fixture].ulLimit);
 
-  // $('.cri').children().show();
-
 });
 
 $('.led > article').on('click', '.cri > .cri', function() {
@@ -106,12 +78,6 @@ $('.led > article').on('click', '.cri > .cri', function() {
     $('article > .temp > .temp:nth-child(2)').hide();
   }
   $('.led > article > .inputSection').hide();
-
-  // document.getElementById("unitSwitch").checked = false;
-  // $('#customTarget').val([]);
-  // $('.color').empty();
-  // $(this).siblings().removeClass('selected');
-  // $(this).addClass('selected');
 
   selection.cri = $(this).attr('data-cri');
 });
@@ -127,14 +93,6 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $(this).siblings().removeClass('selected');
   $(this).addClass('selected');
   $('.led > article > .inputSection').hide();
-  // document.getElementById("unitSwitch").checked = false;
-  // $('#customTarget').val([]);
-  // $('.switch').show();
-  // $('.customInput').show();
-  // $('.clButton').show();
-  // clickCount++;
-  // $(this).siblings().removeClass('selected');
-  // $(this).addClass('selected');
 
   if (selection.fixture === 'EX3D/I' || selection.fixture === 'EV3D') {
     if (selection.cri === '80') {
@@ -335,6 +293,9 @@ $('.led').on('click','.inputSection > .clButton',function() {
 
       $('<div class="directCO"><span>Dir Custom:</span> ' + selection.directCustomLumens + LumensLabel + selection.directCustomWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + ' > .directMin');
       $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + selection.directCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      if (selection.fixture === 'EV3D' && selection.directCustommA >= 227) {
+        $('<div class="thermalWarn"><span>!!!Thermal concerns - see Art!!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      }
     }
     if (customOutput.hasOwnProperty('indirect')) {
       customCat += '-' + selection.indirectTarget;
