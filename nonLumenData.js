@@ -145,7 +145,12 @@ const fixtures = {
         WW: 0.4613,
         WET: 0.5234
       },
-      ulLimit: ulW.EV,
+      ulLimit: {
+        EV3: ulW.EV,
+        WW: ulW.EWW,
+        WG: ulW.EWG,
+        WET: ulW.EW
+      },
       boardID: 1 //bar,line,area
     },
     EV6: {
@@ -166,7 +171,10 @@ const fixtures = {
         V: 0.6497,
         WET: 0.5995
       },
-      ulLimit: ulW.EV,
+      ulLimit: {
+        EV6: ulW.EV,
+        WET: ulW.EW
+      },
       boardID: 1 //bar,line,area
     },
     EVL: {
@@ -270,7 +278,10 @@ const fixtures = {
         WW: 0.4613,
         WET: 0.5234
       },
-      ulLimit: ulW.EX,
+      ulLimit: {
+        EX3: ulW.EX,
+        WET: ulW.EW
+      },
       boardID: 1 //bar,line,area
     },
     EX3B: {
@@ -300,7 +311,10 @@ const fixtures = {
           WET: 0.8638
         }
       },
-      ulLimit: ulW.EX,
+      ulLimit: {
+        EX3B: ulW.EX,
+        WET: ulW.EWB
+      },
       boardID: 1 //bar,line,area
     },
     EV3D: {
@@ -403,7 +417,10 @@ const fixtures = {
         V: 0.6497,
         WET: 0.5995
       },
-      ulLimit: ulW.EX,
+      ulLimit: {
+        EX6: ulW.EX,
+        WET: ulW.EW
+      },
       boardID: 1 //bar,line,area
     },
     EX6B: {
@@ -430,7 +447,10 @@ const fixtures = {
           WET: 0.9371
         }
       },
-      ulLimit: ulW.EX,
+      ulLimit: {
+        EX6B: ulW.EX,
+        WET: ulW.EWB
+      },
       boardID: 1 //bar,line,area
     },
     L6A: {

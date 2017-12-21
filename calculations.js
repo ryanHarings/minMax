@@ -64,7 +64,16 @@ $('.shielding > article').on('click','div > .lens',function() {
   selection[hemiLabel + 'BoardCount'] = fixtures[selection.family][selection.fixture].boardCount ? typeof fixtures[selection.family][selection.fixture].boardCount === 'object' ? Number(fixtures[selection.family][selection.fixture].boardCount[hemisphere]) : Number(fixtures[selection.family][selection.fixture].boardCount) : 1;
 
   selection.boardID = typeof fixtures[selection.family][selection.fixture].boardID === 'object' ? fixtures[selection.family][selection.fixture].boardID[selection.directShielding] : fixtures[selection.family][selection.fixture].boardID;
-  selection.ulW = Number(fixtures[selection.family][selection.fixture].ulLimit);
+
+  if (typeof fixtures[selection.family][selection.fixture].ulLimit === 'object') {
+    if (Object.keys(fixtures[selection.family][selection.fixture].ulLimit).includes(selection[hemiLabel + 'Shielding'])) {
+      selection.ulW = Number(fixtures[selection.family][selection.fixture].ulLimit[selection[hemiLabel + 'Shielding']]);
+    } else {
+      selection.ulW = Number(fixtures[selection.family][selection.fixture].ulLimit[selection.fixture]);
+    }
+  } else {
+    selection.ulW = Number(fixtures[selection.family][selection.fixture].ulLimit);
+  }
 
 });
 
@@ -293,8 +302,8 @@ $('.led').on('click','.inputSection > .clButton',function() {
 
       $('<div class="directCO"><span>Dir Custom:</span> ' + selection.directCustomLumens + LumensLabel + selection.directCustomWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + ' > .directMin');
       $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + selection.directCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
-      if (selection.fixture === 'EV3D' && selection.directCustommA >= 227) {
-        $('<div class="thermalWarn"><span>!!!Thermal concerns - see Art!!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      if (selection.fixture === 'EV3D' || selection.fixture === 'EX3D/I') {
+        $('<div class="thermalWarn"><span>!!! Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
       }
     }
     if (customOutput.hasOwnProperty('indirect')) {
