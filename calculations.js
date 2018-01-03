@@ -302,9 +302,7 @@ $('.led').on('click','.inputSection > .clButton',function() {
 
       $('<div class="directCO"><span>Dir Custom:</span> ' + selection.directCustomLumens + LumensLabel + selection.directCustomWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + ' > .directMin');
       $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + selection.directCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
-      if (selection.fixture === 'EV3D' || selection.fixture === 'EX3D/I') {
-        $('<div class="thermalWarn"><span>!!! Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
-      }
+
     }
     if (customOutput.hasOwnProperty('indirect')) {
       customCat += '-' + selection.indirectTarget;
@@ -313,6 +311,10 @@ $('.led').on('click','.inputSection > .clButton',function() {
       $('<div class="indirectProg"><span>Ind Driver Output:</span> ' + selection.indirectCustommA + mALabel + selection.indirectCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
     }
     $('.output' + (buttonNum - 1) + '.catolog').text(customCat);
+
+    if (selection.fixture === 'EV3D' && selection.directCustommA >= 227) {
+      $('<div class="thermalWarn"><span>!!! Driver Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+    }
 
     console.log(selection, 'selection');
 
@@ -397,13 +399,32 @@ function getOutput(fixObject) {
   return outputObject;
 };
 
+
+// if (selObject.fixture === 'EV3D' && wVar <= selObject.ulW) {
+//   return Number(lumenD.mA) <= 273;
+// } else if (!selObject.hasOwnProperty('indirectShielding') && selObject.fixture === 'EX3D/I') {
+//   return Number(lumenD.mA) <= 330;
+// } else if (!selObject.hasOwnProperty('directShielding') && selObject.fixture === 'EX3D/I') {
+//   return Number(lumenD.mA) <= 325;
+// }
+
 function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
   var inverse = hemi === 'direct' ? 'indirect' : 'direct';
   if (!selObject.customUnit) {
     if (selObject.hasOwnProperty(inverse + 'MaxWattage') && selObject.hasOwnProperty(hemi + 'MaxWattage')) {
       return wVar <= selObject.ulW - selObject[inverse + 'MaxWattage'];
     } else {
-      return wVar <= selObject.ulW;
+      if (selObject.fixture === 'EV3D' && wVar <= selObject.ulW) {
+        return Number(lumenD.mA) <= 273;
+      } else if (selObject.fixture === 'EX3D/I' && wVar <= selObject.ulW) {
+        if (!selObject.hasOwnProperty('indirectShielding')) {
+          return Number(lumenD.mA) <= 330;
+        } else {
+          return Number(lumenD.mA) <= 325;
+        }
+      } else if (!selObject.fixture === 'EV3D' && !selObject.fixture === 'EX3D/I') {
+        return wVar <= selObject.ulW;
+      }
     }
   } else if (selObject.customUnit === 'Watts' && cTarget !== undefined) {
     if (selObject.hasOwnProperty(inverse + 'MaxWattage') && selObject.hasOwnProperty(hemi + 'MaxWattage')) {
