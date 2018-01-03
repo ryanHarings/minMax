@@ -400,7 +400,6 @@ function getOutput(fixObject) {
 };
 
 function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
-  console.log('here');
 
   var inverse = hemi === 'direct' ? 'indirect' : 'direct';
   if (!selObject.customUnit) {
