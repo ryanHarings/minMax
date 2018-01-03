@@ -399,15 +399,6 @@ function getOutput(fixObject) {
   return outputObject;
 };
 
-
-// if (selObject.fixture === 'EV3D' && wVar <= selObject.ulW) {
-//   return Number(lumenD.mA) <= 273;
-// } else if (!selObject.hasOwnProperty('indirectShielding') && selObject.fixture === 'EX3D/I') {
-//   return Number(lumenD.mA) <= 330;
-// } else if (!selObject.hasOwnProperty('directShielding') && selObject.fixture === 'EX3D/I') {
-//   return Number(lumenD.mA) <= 325;
-// }
-
 function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
   var inverse = hemi === 'direct' ? 'indirect' : 'direct';
   if (!selObject.customUnit) {
