@@ -170,6 +170,9 @@ $('.led > article').on('click', '.temp > .temp',function() {
     indirectInverseWatt = '';
   };
 
+  console.log(selection.directMinLumens+','+selection.directMaxLumens+','+50 * selection.directBoardCount+','+selection.directmA+','+selection.directMinWattage+','+selection.directMaxWattage);
+
+
   var lumenLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lumens total @ ';
   var wattLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
 
@@ -396,6 +399,7 @@ function getOutput(fixObject) {
       }
     };
   });
+
   return outputObject;
 };
 
