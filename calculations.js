@@ -18,6 +18,21 @@ $('.modal').modal();
 var selection = {};
 var buttonNum = 0;
 
+var textColor;
+
+// dis for THE David Barbour, boy you fancy AF
+$('.stylin').click(function(){
+  textColor = $('body').css('color');
+  if (textColor === 'rgba(0, 0, 0, 0.87)' || textColor === 'rgb(0, 0, 0)') {
+    $('body').css('color', 'pink');
+    textColor = $('body').css('color');
+  } else {
+    $('body').css('color', 'black');
+    textColor = $('body').css('color');
+  }
+  $('.input-field label').css('color', textColor)
+});
+
 $('.fixture').click(function(){
   $('div').removeClass('selected');
   $(this).addClass('selected');
