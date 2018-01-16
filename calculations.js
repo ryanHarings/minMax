@@ -52,11 +52,14 @@ $('.fixture').click(function(){
   Object.keys(selectedFixtureShielding).forEach(function(key) {
     if (Object.keys(selectedFixtureShielding).length === 2 && (key === 'DIR' || key === 'IND')) {
       $('.shielding > article > div > p').show();
+      $('.direct').show();
+      $('.indirect').show();
       var hemisphere = key === 'DIR' ? 'direct' : 'indirect';
       Object.keys(selectedFixtureShielding[key]).forEach(function(shield) {
         $('.shielding > article > .' + hemisphere).append('<div class="lens hover" id="' + key + "_" + shield + '" data-eff="' + selectedFixtureShielding[key][shield] + '">' + shield + '</div>');
       })
     } else if (key !== 'DIR' && key !== 'IND'){
+      $('.direct').show();
       $('.shielding > article > .direct').append('<div class="lens hover" id="' + key + '" data-eff="' + selectedFixtureShielding[key] + '">' + key + '</div>');
     }
   });
@@ -73,6 +76,16 @@ $('.shielding > article').on('click','div > .lens',function() {
 
   var hemisphere = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[0] : $(this).attr('id');
   var hemiLabel = hemisphere === 'IND' ? 'indirect' : 'direct';
+
+  console.log(selection.fixture.split('').reverse()[0]);
+  if (selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture !== 'EX3D/I') {
+    if (hemiLabel === 'direct') {
+      $('.indirect').hide();
+    }
+    if (hemiLabel === 'indirect') {
+      $('.direct').hide();
+    }
+  }
 
   selection[hemiLabel + 'Shielding'] = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[1] : $(this).attr('id');
   selection[hemiLabel + 'Eff'] = Number($(this).attr('data-eff'));
