@@ -77,7 +77,6 @@ $('.shielding > article').on('click','div > .lens',function() {
   var hemisphere = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[0] : $(this).attr('id');
   var hemiLabel = hemisphere === 'IND' ? 'indirect' : 'direct';
 
-  console.log(selection.fixture.split('').reverse()[0]);
   if (selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture !== 'EX3D/I') {
     if (hemiLabel === 'direct') {
       $('.indirect').hide();
@@ -197,9 +196,6 @@ $('.led > article').on('click', '.temp > .temp',function() {
     indirectInverseLumen = '';
     indirectInverseWatt = '';
   };
-
-  console.log(selection.directMinLumens+','+selection.directMaxLumens+','+50 * selection.directBoardCount+','+selection.directmA+','+selection.directMinWattage+','+selection.directMaxWattage);
-
 
   var lumenLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lumens total @ ';
   var wattLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
@@ -324,7 +320,7 @@ $('.led').on('click','.inputSection > .clButton',function() {
 
     var LumensLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lumens total @ ';
     var WattsLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
-    var mALabel = selection.family === 'LIN' ? ' mA/board @ ' : ' mA total @ ';
+    var mALabel = selection.family === 'LIN' ? ' mA/ft @ ' : ' mA total @ ';
 
     var customCat = $('.output' + (buttonNum - 1) + '.catolog').text();
 
