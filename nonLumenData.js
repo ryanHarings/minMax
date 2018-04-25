@@ -326,7 +326,7 @@ const fixtures = {
         BW: 0.727,
         P: 0.400,
         H: 0.545,
-        R: 0.480
+        R: 0.63
       },
       ulLimit: ulW.EV,
       boardID: 4 //line2
