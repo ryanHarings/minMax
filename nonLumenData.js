@@ -6,7 +6,7 @@ const ulW = {
   EWB: 20,
   EWG: 12.5,
   EWW: 10,
-  EX1B: 36,
+  EX1B: 18,
   EX12: 18,
   EVL: 10,
   EXXX: 12.5,
