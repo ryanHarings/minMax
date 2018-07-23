@@ -460,64 +460,107 @@ function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
 function driverEff(boardType,mA,ul) {
   var driverEff;
 
-  if (boardType === 3) {
-    if (mA < 2300) {driverEff = .8425;}
-    if (mA < 1458) {driverEff = .8225;}
-    if (mA < 1219) {driverEff = .835;}
-    if (mA < 1145) {driverEff = .8625;}
-    if (mA < 813) {driverEff = .845;}
-    if (mA < 673) {driverEff = .815;}
-    if (mA < 549) {driverEff = .785;}
-    if (mA < 372) {driverEff = .7575;}
-    if (mA < 279) {driverEff = .695;}
-    if (mA < 219) {driverEff = .6425;}
-    if (mA < 189) {driverEff = .6025;}
-    if (mA < 151) {driverEff = .568;}
-  } else if (boardType === 1) {
+  if (boardType === 3) { //bar22
+    if (mA < 1984) {driverEff = .91;}
+    if (mA < 1900) {driverEff = .911;}
+    if (mA < 1800) {driverEff = .911;}
+    if (mA < 1700) {driverEff = .91;}
+    if (mA < 1600) {driverEff = .907;}
+    if (mA < 1500) {driverEff = .902;}
+    if (mA < 1400) {driverEff = .901;}
+    if (mA < 1300) {driverEff = .894;}
+    if (mA < 1200) {driverEff = .89;}
+    if (mA < 1100) {driverEff = .911;}
+    if (mA < 1000) {driverEff = .907;}
+    if (mA < 900) {driverEff = .897;}
+    if (mA < 800) {driverEff = .879;}
+    if (mA < 700) {driverEff = .85;}
+    if (mA < 600) {driverEff = .822;}
+    if (mA < 500) {driverEff = .818;}
+    if (mA < 400) {driverEff = .779;}
+    if (mA < 300) {driverEff = .711;}
+    if (mA < 200) {driverEff = .597;}
+    if (mA < 100) {driverEff = .559;}
+  } else if (boardType === 1) { //bar, line, area
     if (mA > 2300) {
-      mA = mA / Math.ceil(ul / 50);
+      mA = mA / Math.ceil(ul / 85);
     };
 
-    if (mA < 2300) {driverEff = .8365;}
-    if (mA < 1675) {driverEff = .825;}
-    if (mA < 1450) {driverEff = .8175;}
-    if (mA < 1384) {driverEff = .85;}
-    if (mA < 940) {driverEff = .828;}
-    if (mA < 751) {driverEff = .808;}
-    if (mA < 600) {driverEff = .79;}
-    if (mA < 400) {driverEff = .76;}
-    if (mA < 350) {driverEff = .725;}
-    if (mA < 270) {driverEff = .685;}
-    if (mA < 234) {driverEff = .65;}
-    if (mA < 199) {driverEff = .60;}
+    if (mA <= 2300) {driverEff = .90;}
+    if (mA < 2200) {driverEff = .897;}
+    if (mA < 2100) {driverEff = .898;}
+    if (mA < 2000) {driverEff = .898;}
+    if (mA < 1900) {driverEff = .897;}
+    if (mA < 1800) {driverEff = .898;}
+    if (mA < 1700) {driverEff = .897;}
+    if (mA < 1600) {driverEff = .897;}
+    if (mA < 1500) {driverEff = .908;}
+    if (mA < 1400) {driverEff = .90;}
+    if (mA < 1300) {driverEff = .896;}
+    if (mA < 1200) {driverEff = .894;}
+    if (mA < 1100) {driverEff = .89;}
+    if (mA < 1000) {driverEff = .86;}
+    if (mA < 900) {driverEff = .859;}
+    if (mA < 841) {driverEff = .859;}
+    if (mA < 800) {driverEff = .844;}
+    if (mA < 700) {driverEff = .828;}
+    if (mA < 600) {driverEff = .828;}
+    if (mA < 561) {driverEff = .832;}
+    if (mA < 500) {driverEff = .805;}
+    if (mA < 400) {driverEff = .762;}
+    if (mA < 300) {driverEff = .692;}
+    if (mA < 200) {driverEff = .576;}
+    if (mA < 100) {driverEff = .563;}
+  } else if (boardType === 2) { //line22
 
-  } else if (boardType === 2) {
+    if (mA < 1872) {driverEff = .91;}
+    if (mA < 1800) {driverEff = .912;}
+    if (mA < 1700) {driverEff = .912;}
+    if (mA < 1600) {driverEff = .908;}
+    if (mA < 1500) {driverEff = .908;}
+    if (mA < 1400) {driverEff = .909;}
+    if (mA < 1300) {driverEff = .906;}
+    if (mA < 1200) {driverEff = .903;}
+    if (mA < 1100) {driverEff = .913;}
+    if (mA < 1000) {driverEff = .907;}
+    if (mA < 900) {driverEff = .90;}
+    if (mA < 800) {driverEff = .891;}
+    if (mA < 700) {driverEff = .855;}
+    if (mA < 600) {driverEff = .855;}
+    if (mA < 500) {driverEff = .855;}
+    if (mA < 441) {driverEff = .856;}
+    if (mA < 400) {driverEff = .78;}
+    if (mA < 300) {driverEff = .758;}
+    if (mA < 200) {driverEff = .612;}
+    if (mA < 100) {driverEff = .572;}
 
-    if (mA < 2300) {driverEff = .8425;}
-    if (mA < 1458) {driverEff = .8225;}
-    if (mA < 1219) {driverEff = .835;}
-    if (mA < 1145) {driverEff = .8625;}
-    if (mA < 813) {driverEff = .845;}
-    if (mA < 673) {driverEff = .815;}
-    if (mA < 549) {driverEff = .785;}
-    if (mA < 372) {driverEff = .7575;}
-    if (mA < 279) {driverEff = .695;}
-    if (mA < 219) {driverEff = .6425;}
+  } else if (boardType === 4) { //line2
 
-  } else if (boardType === 4) {
-
-    if (mA < 2300) {driverEff = .88;}
-    if (mA < 1800) {driverEff = .87;}
-    if (mA < 1400) {driverEff = .87;}
-    if (mA < 1200) {driverEff = .85;}
-    if (mA < 940) {driverEff = .828;}
-    if (mA < 700) {driverEff = .808;}
-    if (mA < 600) {driverEff = .79;}
-    if (mA < 400) {driverEff = .76;}
-    if (mA < 350) {driverEff = .725;}
-    if (mA < 270) {driverEff = .745;}
-    if (mA < 234) {driverEff = .65;}
-    if (mA < 199) {driverEff = .60;}
+    if (mA <= 2300) {driverEff = .873;}
+    if (mA < 2200) {driverEff = .873;}
+    if (mA < 2100) {driverEff = .873;}
+    if (mA < 2000) {driverEff = .873;}
+    if (mA < 1900) {driverEff = .873;}
+    if (mA < 1800) {driverEff = .873;}
+    if (mA < 1700) {driverEff = .873;}
+    if (mA < 1600) {driverEff = .874;}
+    if (mA < 1500) {driverEff = .874;}
+    if (mA < 1400) {driverEff = .885;}
+    if (mA < 1300) {driverEff = .87;}
+    if (mA < 1200) {driverEff = .87;}
+    if (mA < 1100) {driverEff = .864;}
+    if (mA < 1000) {driverEff = .838;}
+    if (mA < 900) {driverEff = .831;}
+    if (mA < 851) {driverEff = .831;}
+    if (mA < 800) {driverEff = .828;}
+    if (mA < 700) {driverEff = .814;}
+    if (mA < 600) {driverEff = .809;}
+    if (mA < 561) {driverEff = .809;}
+    if (mA < 500) {driverEff = .791;}
+    if (mA < 400) {driverEff = .766;}
+    if (mA < 300) {driverEff = .718;}
+    if (mA < 200) {driverEff = .602;}
+    if (mA < 100) {driverEff = .563;}
   }
   return driverEff;
 };
