@@ -513,7 +513,7 @@ function driverEff(boardType,mA,ul) {
     if (mA < 100) {driverEff = .563;}
   } else if (boardType === 2) { //line22
 
-    if (mA < 1872) {driverEff = .91;}
+    if (mA <= 1872) {driverEff = .91;}
     if (mA < 1800) {driverEff = .912;}
     if (mA < 1700) {driverEff = .912;}
     if (mA < 1600) {driverEff = .908;}
