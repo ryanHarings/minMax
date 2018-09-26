@@ -11,6 +11,7 @@ const ulW = {
   EVL: 10,
   EXXX: 12.5,
   L6: 25,
+  L8: 25,
   F14: 25,
   F18: 36,
   F24: 71,
@@ -105,7 +106,7 @@ const fixtures = {
     },
     EV1: {
       shielding: {
-        A: 0.5284,
+        A: 0.5673,
         HE: 0.6245,
         HED: 0.5721,
         BW: 0.4956,
@@ -113,7 +114,7 @@ const fixtures = {
         WHE: 0.5541
       },
       ulLimit: ulW.E1,
-      boardID: 1 //bar,line,area
+      boardID: 4 //now line2, was bar,line,area
     },
     EV3: {
       shielding: {
@@ -178,6 +179,7 @@ const fixtures = {
     },
     EX1: {
       shielding: {
+        A: 0.5673,
         HE: 0.6245,
         HED: 0.5721,
         BW: 0.4956,
@@ -185,7 +187,7 @@ const fixtures = {
         WHE: 0.5541
       },
       ulLimit: ulW.E1,
-      boardID: 1 //bar,line,area
+      boardID: 4 //now line2, was bar,line,area
     },
     EX12: {
       shielding: {
@@ -204,11 +206,12 @@ const fixtures = {
         }
       },
       ulLimit: ulW.EX12,
-      boardID: 1 //bar,line,area
+      boardID: 4 //bar,line,area
     },
     EX1B: {
       shielding: {
         DIR: {
+          A: .5673,
           HE: 0.5818,
           HED: 0.575,
           BW: 0.4488,
@@ -223,7 +226,7 @@ const fixtures = {
         }
       },
       ulLimit: ulW.EX1B,
-      boardID: 1 //bar,line,area
+      boardID: 4 //bar,line,area
     },
     EX2: {
       shielding: {
@@ -457,6 +460,36 @@ const fixtures = {
         "75": 1,
         "35": 2 //line22
       }
+    },
+    'L6D/I': {
+      shielding: {
+        DIR: {
+          "40": 0.815,
+          "70": 0.676,
+          "100": 0.673,
+          A: 0.58
+        },
+        IND: {
+          BW: 0.836
+        }
+      },
+      ulLimit: ulW.L6,
+      boardID: 4 //line2
+    },
+    'L8D/I': {
+      shielding: {
+        DIR: {
+          "40": 0.846,
+          "70": 0.713,
+          "100": 0.749,
+          A: 0.636
+        },
+        IND: {
+          BW: 0.866
+        }
+      },
+      ulLimit: ulW.L8,
+      boardID: 4 //line2
     }
   },
   TRO: {
