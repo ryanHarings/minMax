@@ -38,6 +38,8 @@ const fixBoardCounts = {
   TRO24: 2,
   F14: 3,
   F18: 4,
+  L6D_DIR: 2,
+  L6D_IND: 1,
   F24B_DIR: 8,
   F24B_IND: 4,
   F36B_DIR: 20,
@@ -192,6 +194,7 @@ const fixtures = {
     EX12: {
       shielding: {
         DIR: {
+          A: 0.5673
           HE: 0.6245,
           HED: 0.5721,
           BW: 0.4956,
@@ -211,7 +214,7 @@ const fixtures = {
     EX1B: {
       shielding: {
         DIR: {
-          A: .5673,
+          A: 0.5673,
           HE: 0.5818,
           HED: 0.575,
           BW: 0.4488,
@@ -474,6 +477,10 @@ const fixtures = {
         }
       },
       ulLimit: ulW.L6,
+      boardCount: {
+        DIR: fixBoardCounts.L6D_DIR,
+        IND: fixBoardCounts.L6D_IND
+      },
       boardID: 4 //line2
     },
     'L8D/I': {
@@ -489,6 +496,10 @@ const fixtures = {
         }
       },
       ulLimit: ulW.L8,
+      boardCount: {
+        DIR: fixBoardCounts.L6D_DIR,
+        IND: fixBoardCounts.L6D_IND
+      },
       boardID: 4 //line2
     }
   },

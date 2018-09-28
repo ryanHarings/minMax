@@ -88,7 +88,7 @@ $('.shielding > article').on('click','div > .lens',function() {
 
   selection[hemiLabel + 'Shielding'] = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[1] : $(this).attr('id');
   selection[hemiLabel + 'Eff'] = Number($(this).attr('data-eff'));
-  selection[hemiLabel + 'BoardCount'] = fixtures[selection.family][selection.fixture].boardCount ? typeof fixtures[selection.family][selection.fixture].boardCount === 'object' ? Number(fixtures[selection.family][selection.fixture].boardCount[hemisphere]) : Number(fixtures[selection.family][selection.fixture].boardCount) : selection.fixture === 'L6D/I' ? 2 : selection.fixture === 'L8D/I' ? 2 : 1;
+  selection[hemiLabel + 'BoardCount'] = fixtures[selection.family][selection.fixture].boardCount ? typeof fixtures[selection.family][selection.fixture].boardCount === 'object' ? Number(fixtures[selection.family][selection.fixture].boardCount[hemisphere]) : Number(fixtures[selection.family][selection.fixture].boardCount) : 1;
 
   selection.boardID = typeof fixtures[selection.family][selection.fixture].boardID === 'object' ? fixtures[selection.family][selection.fixture].boardID[selection.directShielding] : fixtures[selection.family][selection.fixture].boardID;
 
@@ -411,7 +411,7 @@ function getOutput(fixObject) {
   Object.keys(boardData).forEach((key) => {
     var boardDataLine = boardData[key]
     var directmA = fixObject.family === 'LIN' ? linBoardCount * Number(boardDataLine.mA) : fixObject.directBoardCount * Number(boardDataLine.mA);
-    var indirectmA = fixObject.family === 'LIN' ? directmA : fixObject.indirectBoardCount * Number(boardDataLine.mA);
+    var indirectmA = fixObject.family === 'LIN' ? directmA / (linBoardCount === 16 ? 2 : 1) : fixObject.indirectBoardCount * Number(boardDataLine.mA);
     var directWatts = (boardDataLine.boardWattage / driverEff(fixObject.boardID, directmA, fixObject.ulW)) * fixObject.directBoardCount;
     var indirectWatts = (boardDataLine.boardWattage / driverEff(fixObject.boardID, indirectmA, fixObject.ulW)) * fixObject.indirectBoardCount;
 
@@ -448,7 +448,6 @@ function getOutput(fixObject) {
 };
 
 function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
-  console.log(wVar)
   var inverse = hemi === 'direct' ? 'indirect' : 'direct';
   if (!selObject.customUnit) {
     if (selObject.hasOwnProperty(inverse + 'MaxWattage') && selObject.hasOwnProperty(hemi + 'MaxWattage')) {
