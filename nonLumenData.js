@@ -194,7 +194,7 @@ const fixtures = {
     EX12: {
       shielding: {
         DIR: {
-          A: 0.5673
+          A: 0.5673,
           HE: 0.6245,
           HED: 0.5721,
           BW: 0.4956,
