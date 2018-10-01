@@ -11,7 +11,7 @@ function createList(effObject) {
     })
   })
 };
-
+console.log(fixtures)
 createList(fixtures);
 $('.modal').modal();
 
