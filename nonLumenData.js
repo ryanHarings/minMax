@@ -317,13 +317,13 @@ const fixtures = {
     },
     EV3D: {
       shielding: {
-        A: 0.634,
-        AL: 0.900,
+        A: 0.643,
+        AL: 0.825,
         HE: 0.740,
         WHE: 0.694,
         BW: 0.727,
         P: 0.400,
-        H: 0.545,
+        H: 0.591,
         R: 0.63
       },
       ulLimit: ulW.EV,
@@ -332,17 +332,17 @@ const fixtures = {
     "EX3D/I": {
       shielding: {
         DIR: {
-          A: 0.634,
-          AL: 0.882,
+          A: 0.64,
+          AL: 0.805,
           HE: 0.716,
-          HED: 0.604,
+          HED: 0.583,
           WHE: 0.658,
           BW: 0.676
         },
         IND: {
           HE: 0.882,
-          HEA: 0.895,
-          WHE: 0.680,
+          HEA: 0.856,
+          WHE: 0.663,
           BW: 0.845
         }
       },
