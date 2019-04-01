@@ -11,7 +11,6 @@ function createList(effObject) {
     })
   })
 };
-console.log(fixtures)
 createList(fixtures);
 $('.modal').modal();
 
@@ -407,7 +406,9 @@ function getOutput(fixObject) {
 
   var outputObject = {};
 
-  var linBoardCount = fixObject.directShielding === '35' ? 4 : fixObject.fixture === 'L6D/I' ? 16 : fixObject.fixture === 'L8D/I' ? 16 : fixObject.fixture === 'EX3D/I' ? 4 : fixObject.fixture === 'EV3D' ? 4 : 6;
+  var linBoardCount = fixObject.directShielding === '35' ? 4 : fixObject.fixture === 'L6D/I' ? 16 : fixObject.fixture === 'L8D/I' ? 16 : fixObject.fixture === 'EX3D/I' && fixObject.directShielding!=="WET" ? 4 : fixObject.fixture === 'EV3D' ? 4 : 6;
+  console.log(fixObject)
+  console.log(linBoardCount)
   Object.keys(boardData).forEach((key) => {
     var boardDataLine = boardData[key]
     var directmA = fixObject.family === 'LIN' ? linBoardCount * Number(boardDataLine.mA) : fixObject.directBoardCount * Number(boardDataLine.mA);
@@ -565,8 +566,6 @@ function driverEff(boardType,mA,ul) {
     };
 
     if (mA <= 2300) {driverEff = .873;}
-    if (mA < 1600) {driverEff = .873;}
-    if (mA < 1400) {driverEff = .885;}
     if (mA < 1300) {driverEff = .872;}
     if (mA < 1150) {driverEff = .872;}
     if (mA < 1050) {driverEff = .864;}

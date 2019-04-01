@@ -137,14 +137,12 @@ const fixtures = {
         R: 0.5779,
         V: 0.5749,
         WG: 0.43,
-        WW: 0.4613,
-        WET: 0.5234
+        WW: 0.4613
       },
       ulLimit: {
         EV3: ulW.EV,
         WW: ulW.EWW,
-        WG: ulW.EWG,
-        WET: ulW.EW
+        WG: ulW.EWG 
       },
       boardID: 1 //bar,line,area
     },
@@ -273,12 +271,10 @@ const fixtures = {
         HE: 0.6441,
         R: 0.5779,
         V: 0.5749,
-        WW: 0.4613,
-        WET: 0.5234
+        WW: 0.4613
       },
       ulLimit: {
-        EX3: ulW.EX,
-        WET: ulW.EW
+        EX3: ulW.EX 
       },
       boardID: 1 //bar,line,area
     },
@@ -324,9 +320,13 @@ const fixtures = {
         BW: 0.727,
         P: 0.400,
         H: 0.591,
-        R: 0.63
+        R: 0.63,
+        WET: 0.5234
       },
-      ulLimit: ulW.EV,
+      ulLimit: {
+        EV3D: ulW.EV,
+        WET: ulW.EW
+      },
       boardID: 4 //line2
     },
     "EX3D/I": {
@@ -337,7 +337,8 @@ const fixtures = {
           HE: 0.716,
           HED: 0.583,
           WHE: 0.658,
-          BW: 0.676
+          BW: 0.676,
+          WET: 0.5234
         },
         IND: {
           HE: 0.882,
@@ -346,7 +347,10 @@ const fixtures = {
           BW: 0.845
         }
       },
-      ulLimit: ulW.EX,
+      ulLimit: {
+        "EX3D/I": ulW.EX,
+        WET: ulW.EW
+      },
       boardID: 4 //line2
     },
     EX4: {
