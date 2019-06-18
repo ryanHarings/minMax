@@ -1,6 +1,8 @@
 const ulW = {
   EV: 12,
+  EVLL: 13,
   EX: 25,
+  EXLL: 26,
   E1: 9.25,
   EW: 10,
   EWB: 20,
@@ -311,6 +313,22 @@ const fixtures = {
       },
       boardID: 1 //bar,line,area
     },
+    EV2D: {
+      shielding: {
+        A: 0.684,
+        AL: 0.699,
+        HE: 0.814,
+        HED: 0.677,
+        WHE: 0.795,
+        BW: 0.789,
+        H: 0.546,
+        R: 0.64
+      },
+      ulLimit: {
+        EV2D: ulW.EVLL
+      },
+      boardID: 5 //ll
+    },
     EV3D: {
       shielding: {
         A: 0.643,
@@ -328,6 +346,44 @@ const fixtures = {
         WET: ulW.EW
       },
       boardID: 4 //line2
+    },
+    EV4D: {
+      shielding: {
+        A: 0.757,
+        AL: 0.684,
+        HE: 0.862,
+        HED: 0.752,
+        WHE: 0.841,
+        BW: 0.84,
+        H: 0.634,
+        R: 0.674
+      },
+      ulLimit: {
+        EV4D: ulW.EVLL
+      },
+      boardID: 5 //ll
+    },
+    "EX2D/I": {
+      shielding: {
+        DIR: {
+          A: 0.663,
+          AL: 0.676,
+          HE: 0.79,
+          HED: 0.64,
+          WHE: 0.772,
+          BW: 0.773
+        },
+        IND: {
+          HE: 0.883,
+          HEA: 0.832,
+          WHE: 0.681,
+          BW: 0.831
+        }
+      },
+      ulLimit: {
+        "EX2D/I": ulW.EXLL
+      },
+      boardID: 5 //ll
     },
     "EX3D/I": {
       shielding: {
@@ -352,6 +408,28 @@ const fixtures = {
         WET: ulW.EW
       },
       boardID: 4 //line2
+    },
+    "EX4D/I": {
+      shielding: {
+        DIR: {
+          A: 0.663,
+          AL: 0.676,
+          HE: 0.79,
+          HED: 0.64,
+          WHE: 0.772,
+          BW: 0.773
+        },
+        IND: {
+          HE: 0.883,
+          HEA: 0.832,
+          WHE: 0.681,
+          BW: 0.831
+        }
+      },
+      ulLimit: {
+        "EX4D/I": ulW.EXLL
+      },
+      boardID: 5 //ll
     },
     EX4: {
       shielding: {

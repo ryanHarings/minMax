@@ -76,7 +76,8 @@ $('.shielding > article').on('click','div > .lens',function() {
   var hemisphere = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[0] : $(this).attr('id');
   var hemiLabel = hemisphere === 'IND' ? 'indirect' : 'direct';
   
-  if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture !== 'EX3D/I' && selection.fixture !== 'L6D/I') && selection.fixture !== 'L8D/I' || Number($(this).attr('id').split('_')[1]) > 0) {
+  // if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture.includes('D/I') === 'EX3D/I' && selection.fixture !== 'L6D/I') && selection.fixture !== 'L8D/I' || Number($(this).attr('id').split('_')[1]) > 0) {
+  if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture.includes('D/I') === false) || Number($(this).attr('id').split('_')[1]) > 0) {
     if (hemiLabel === 'direct') {
       $('.indirect').hide();
     }
@@ -129,7 +130,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $('.led > article > .inputSection').hide();
 
   // if (selection.fixture === 'EX3D/I' || selection.fixture === 'EV3D') {
-  if (selection.boardID === 4) {
+  if (selection.boardID > 3) {
     if (selection.cri === '80') {
       selection.color = '8' + $(this).attr('data-temp');
     } else {
@@ -215,13 +216,13 @@ $('.led > article').on('click', '.temp > .temp',function() {
   var wattLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
 
   var fixtureName;
-  if (selection.fixture === 'EX3D/I') {
+  if (selection.fixture === 'EX2D/I' || selection.fixture === 'EX3D/I' || selection.fixture === 'EX4D/I') {
     if (outputData.hasOwnProperty('direct') && outputData.hasOwnProperty('indirect')) {
-      fixtureName = 'EX3DI';
+      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'DI';
     } else if (outputData.hasOwnProperty('direct')) {
-      fixtureName = 'EX3D';
+      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'D';
     } else {
-      fixtureName = 'EX3I'
+      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'I'
     }
   } else if (selection.fixture === 'L6D/I' || selection.fixture === 'L8D/I') {
     if (selection.directShielding === '100') {
@@ -231,7 +232,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
     }
   } else {
     fixtureName = selection.fixture;
-  };
+  }
   
   var shieldingName = '';
   if (outputData.hasOwnProperty('direct')) {
@@ -247,7 +248,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
 
   var criName = '-';
   // if (selection.fixture !== 'EX3D/I' && selection.fixture !== 'EV3D') {
-  if (selection.boardID !== 4) {
+  if (selection.boardID < 4) {
     if (selection.cri === '80') {
       criName += '8';
     } else {
@@ -361,7 +362,7 @@ $('.led').on('click','.inputSection > .clButton',function() {
     }
     $('.output' + (buttonNum - 1) + '.catolog').text(customCat);
 
-    if (selection.fixture === 'EV3D' && selection.directCustommA >= 227) {
+    if ((selection.fixture === 'EV3D' || selection.fixture === 'EV2D') && selection.directCustommA >= 227) {
       $('<div class="thermalWarn"><span>!!! Driver Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
     }
 
@@ -397,18 +398,19 @@ function getOutput(fixObject) {
   if (fixObject.boardID === 1) {boardData = barLineArea;}
   else if (fixObject.boardID === 2) {boardData = linero22;}
   else if (fixObject.boardID === 3) {boardData = bar22;}
-  else if (fixObject.boardID === 4) {boardData = line2;};
+  else if (fixObject.boardID === 4) {boardData = line2;}
+  else if (fixObject.boardID === 5) {boardData = ll;};
 
   var criMultiplier = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
-  if (fixObject.boardID === 4 || fixObject.color === '27k') {
+  if (fixObject.boardID > 3 || fixObject.color === '27k') {
     criMultiplier = 1;
   }
 
   var outputObject = {};
 
-  var linBoardCount = fixObject.directShielding === '35' ? 4 : fixObject.fixture === 'L6D/I' ? 16 : fixObject.fixture === 'L8D/I' ? 16 : fixObject.fixture === 'EX3D/I' && fixObject.directShielding!=="WET" ? 4 : fixObject.fixture === 'EV3D' ? 4 : 6;
+  var linBoardCount = fixObject.directShielding === '35' ? 4 : fixObject.fixture === 'L6D/I' ? 16 : fixObject.fixture === 'L8D/I' ? 16 : fixObject.fixture.includes('D') && fixObject.directShielding!=="WET" ? 4 : 6;
   console.log(fixObject)
-  console.log(linBoardCount)
+  // console.log(linBoardCount)
   Object.keys(boardData).forEach((key) => {
     var boardDataLine = boardData[key]
     var directmA = fixObject.family === 'LIN' ? linBoardCount * Number(boardDataLine.mA) : fixObject.directBoardCount * Number(boardDataLine.mA);
@@ -461,6 +463,30 @@ function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
           return Number(lumenD.mA) <= 330;
         } else {
           return Number(lumenD.mA) <= 325;
+        }
+      } else if (selObject.fixture === 'EV2D' && wVar <= selObject.ulW) {
+        if (selObject.directShielding === "R") {
+          return Number(lumenD.mA) <= 194;
+        } else {
+          return Number(lumenD.mA) <= 238;
+        }
+      } else if (selObject.fixture === 'EX2D/I' && wVar <= selObject.ulW) {
+        if (hemi === 'direct') {
+          return Number(lumenD.mA) <= 288;
+        } else {
+          return Number(lumenD.mA) <= 288;
+        }
+      } else if (selObject.fixture === 'EV4D' && wVar <= selObject.ulW) {
+        if (selObject.directShielding === "R") {
+          return Number(lumenD.mA) <= 206;
+        } else {
+          return Number(lumenD.mA) <= 250;
+        }
+      } else if (selObject.fixture === 'EX4D/I' && wVar <= selObject.ulW) {
+        if (hemi === 'direct') {
+          return Number(lumenD.mA) <= 288;
+        } else {
+          return Number(lumenD.mA) <= 288;
         }
       } else if ((selObject.fixture === 'L6D/I' || selObject.fixture === 'L8D/I') && wVar <= selObject.ulW) {
         if (hemi === 'direct') {
@@ -560,7 +586,7 @@ function driverEff(boardType,mA,ul) {
     if (mA < 200) {driverEff = .612;}
     if (mA < 100) {driverEff = .572;}
 
-  } else if (boardType === 4) { //line2
+  } else if (boardType > 3) { //line2
     if (mA > 2300) {
       mA = mA / Math.ceil(mA/2300);
     };
