@@ -218,11 +218,11 @@ $('.led > article').on('click', '.temp > .temp',function() {
   var fixtureName;
   if (selection.fixture === 'EX2D/I' || selection.fixture === 'EX3D/I' || selection.fixture === 'EX4D/I') {
     if (outputData.hasOwnProperty('direct') && outputData.hasOwnProperty('indirect')) {
-      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'DI';
+      fixtureName = 'EX'+ (selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3') +'DI';
     } else if (outputData.hasOwnProperty('direct')) {
-      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'D';
+      fixtureName = 'EX'+ (selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3') +'D';
     } else {
-      fixtureName = 'EX'+ selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3' +'I'
+      fixtureName = 'EX'+ (selection.fixture.includes('2') ? '2' : selection.fixture.includes('4') ? '4' : '3') +'I'
     }
   } else if (selection.fixture === 'L6D/I' || selection.fixture === 'L8D/I') {
     if (selection.directShielding === '100') {
