@@ -74,20 +74,35 @@ const fixtures = {
       ulLimit: ulW.EV,
       boardID: 1 //bar,line,area
     },
-    ET4: {
-      shielding: {
-        A: 0.634,
-        AL: 0.900,
-        HE: 0.740,
-        WHE: 0.694,
-        BW: 0.727,
-        H: 0.545,
-        R: 0.63
+    // ET4: {
+      // shielding: {
+        // A: 0.634,
+        // AL: 0.900,
+        // HE: 0.740,
+        // WHE: 0.694,
+        // BW: 0.727,
+        // H: 0.545,
+        // R: 0.63
 
-      },
-      ulLimit: ulW.EV,
-      boardID: 1 //bar,line,area
-    },
+      // },
+      // ulLimit: ulW.EV,
+      // boardID: 1 //bar,line,area
+    // },
+    // ET4D: {
+      // shielding: {
+        // A: 0.643,
+        // AL: 0.825,
+        // HE: 0.740,
+        // WHE: 0.694,
+        // BW: 0.727,
+        // P: 0.400,
+        // H: 0.591,
+        // R: 0.63,
+        // WET: 0.5234
+      // },
+      // ulLimit: ulW.EV,
+      // boardID: 4 //line2
+    // },
     ET6: {
       shielding: {
         A: 0.6689,
