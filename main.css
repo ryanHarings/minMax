@@ -1,3 +1,13 @@
+div[id*='EX1'], div[id*='EV1'] {
+    /* -webkit-user-select: none; */
+    /* -khtml-user-select: none; */
+    /* -moz-user-select: none; */
+    /* -ms-user-select: none; */
+    /* user-select: none !important; */
+    color: grey;
+    opacity: 0.5;
+}
+
 /*main look*/
 
 .fixtures, .shielding, .led {

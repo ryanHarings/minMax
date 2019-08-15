@@ -12,6 +12,8 @@ function createList(effObject) {
   })
 };
 createList(fixtures);
+// $('#EX12').attr('disabled', 'true')
+
 $('.modal').modal();
 
 var selection = {};
@@ -32,7 +34,7 @@ $('.stylin').click(function(){
   $('.input-field label').css('color', textColor)
 });
 
-$('.fixture').click(function(){
+$(".fixture:not(div[id*='EX1'],div[id*='EV1'])").click(function(){
   $('div').removeClass('selected');
   $(this).addClass('selected');
   selection = {};
