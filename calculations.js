@@ -34,7 +34,8 @@ $('.stylin').click(function(){
   $('.input-field label').css('color', textColor)
 });
 
-$(".fixture:not(div[id*='EX1'],div[id*='EV1'])").click(function(){
+// $(".fixture:not(div[id*='EX1'],div[id*='EV1'])").click(function(){
+$('.fixture').click(function(){
   $('div').removeClass('selected');
   $(this).addClass('selected');
   selection = {};
