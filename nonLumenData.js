@@ -428,18 +428,18 @@ const fixtures = {
     "EX4D/I": {
       shielding: {
         DIR: {
-          A: 0.663,
-          AL: 0.676,
-          HE: 0.79,
-          HED: 0.64,
-          WHE: 0.772,
-          BW: 0.773
+          A: 0.745,
+          AL: 0.677,
+          HE: 0.845,
+          HED: 0.753,
+          WHE: 0.834,
+          BW: 0.835
         },
         IND: {
-          HE: 0.883,
-          HEA: 0.832,
-          WHE: 0.681,
-          BW: 0.831
+          HE: 0.908,
+          HEA: 0.867,
+          WHE: 0.714,
+          BW: 0.818
         }
       },
       ulLimit: {
