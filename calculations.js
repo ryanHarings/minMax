@@ -576,16 +576,16 @@ function driverEff(boardType,mA,ul) {
     if (mA < 1400) {driverEff = .909;}
     if (mA < 1300) {driverEff = .906;}
     if (mA < 1200) {driverEff = .903;}
-    if (mA < 1100) {driverEff = .913;}
-    if (mA < 1000) {driverEff = .907;}
-    if (mA < 900) {driverEff = .90;}
-    if (mA < 800) {driverEff = .891;}
-    if (mA < 700) {driverEff = .855;}
-    if (mA < 600) {driverEff = .855;}
-    if (mA < 500) {driverEff = .855;}
-    if (mA < 441) {driverEff = .856;}
+    if (mA < 1100) {driverEff = .861;}
+    if (mA < 1000) {driverEff = .831;}
+    if (mA < 900) {driverEff = .824;}
+    if (mA < 800) {driverEff = .808;}
+    if (mA < 700) {driverEff = .798;}
+    if (mA < 600) {driverEff = .772;}
+    if (mA < 500) {driverEff = .772;}
+    if (mA < 441) {driverEff = .755;}
     if (mA < 400) {driverEff = .78;}
-    if (mA < 300) {driverEff = .758;}
+    if (mA < 300) {driverEff = .614;}
     if (mA < 200) {driverEff = .612;}
     if (mA < 100) {driverEff = .572;}
 
