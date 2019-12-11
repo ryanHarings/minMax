@@ -407,9 +407,9 @@ const fixtures = {
       shielding: {
         DIR: {
           A: 0.64,
-          AL: 0.805,
+          AL: 0.818,
           HE: 0.716,
-          HED: 0.583,
+          HED: 0.66,
           WHE: 0.658,
           BW: 0.676
         },
