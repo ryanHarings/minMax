@@ -423,7 +423,7 @@ const fixtures = {
       ulLimit: {
         "EX3D/I": ulW.EX 
       },
-      boardID: 4 //line2
+      boardID: 5 //line2
     },
     "EX4D/I": {
       shielding: {
@@ -579,7 +579,7 @@ const fixtures = {
         DIR: fixBoardCounts.L6D_DIR,
         IND: fixBoardCounts.L6D_IND
       },
-      boardID: 4 //line2
+      boardID: 5 //line2
     },
     'L8D/I': {
       shielding: {
@@ -598,7 +598,7 @@ const fixtures = {
         DIR: fixBoardCounts.L6D_DIR,
         IND: fixBoardCounts.L6D_IND
       },
-      boardID: 4 //line2
+      boardID: 5 //line2
     }
   },
   TRO: {
