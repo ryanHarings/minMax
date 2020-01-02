@@ -92,7 +92,7 @@ $('.shielding > article').on('click','div > .lens',function() {
   selection[hemiLabel + 'Shielding'] = $(this).attr('id').includes('_') ? $(this).attr('id').split('_')[1] : $(this).attr('id');
   selection[hemiLabel + 'Eff'] = Number($(this).attr('data-eff'));
   selection[hemiLabel + 'BoardCount'] = fixtures[selection.family][selection.fixture].boardCount ? typeof fixtures[selection.family][selection.fixture].boardCount === 'object' ? Number(fixtures[selection.family][selection.fixture].boardCount[hemisphere]) : Number(fixtures[selection.family][selection.fixture].boardCount) : 1;
-
+  
   selection.boardID = typeof fixtures[selection.family][selection.fixture].boardID === 'object' ? fixtures[selection.family][selection.fixture].boardID[selection.directShielding] : fixtures[selection.family][selection.fixture].boardID;
 
   if (typeof fixtures[selection.family][selection.fixture].ulLimit === 'object') {
@@ -182,7 +182,8 @@ $('.led > article').on('click', '.temp > .temp',function() {
   //if there are any watts remaining for use on inverse side
   if (selection.hasOwnProperty('directShielding') && selection.hasOwnProperty('indirectShielding') && selection.fixture.charAt(0) !== 'F') {
     
-    if (selection.fixture !== 'L6D/I' && selection.fixture !== 'L8D/I') {
+    // if (selection.fixture !== 'L6D/I' && selection.fixture !== 'L8D/I') {
+    if (selection.fixture) {
       var inverseData = getOutput(selection);
     } else {
       var inverseData = {
@@ -196,7 +197,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
         }
       }
     }
-
+    console.log('before:', selection)
     selection.indirectRemMaxLumens = Math.floor10(inverseData.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
     selection.indirectRemMaxWattage = Math.ceil10(inverseData.indirect.maxWatt * selection.indirectBoardCount, -1);
 
