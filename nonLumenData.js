@@ -1,4 +1,5 @@
 const ulW = {
+  C: 20,
   EV: 12,
   EVLL: 13,
   EX: 25,
@@ -30,7 +31,8 @@ const ulW = {
   ARE22: 60,
   ARE14: 60,
   ARE24: 120,
-  ARE44: 140
+  ARE44: 140,
+  M: 16.5
 }
 
 const fixBoardCounts = {
@@ -60,6 +62,13 @@ const fixBoardCounts = {
 
 const fixtures = {
   LIN: {
+    C: {
+      shielding: {
+        A: 0.80
+      },
+      ulLimit: ulW.C,
+      boardID: 4 //line2
+    },
     E2: {
       shielding: {
         A:	0.5365
@@ -579,7 +588,7 @@ const fixtures = {
         DIR: fixBoardCounts.L6D_DIR,
         IND: fixBoardCounts.L6D_IND
       },
-      boardID: 5 //line2
+      boardID: 5 //ll
     },
     'L8D/I': {
       shielding: {
@@ -598,7 +607,23 @@ const fixtures = {
         DIR: fixBoardCounts.L6D_DIR,
         IND: fixBoardCounts.L6D_IND
       },
-      boardID: 5 //line2
+      boardID: 5 //ll
+    },
+    M: {
+      shielding: {
+        A: 0.704,
+        HE: 0.778,
+        P: 0.575
+      },
+      ulLimit: ulW.M,
+      boardID: 5 //ll
+    },
+    MW: {
+      shielding: {
+        HE: 0.851
+      },
+      ulLimit: ulW.M,
+      boardID: 5 //ll
     }
   },
   TRO: {
