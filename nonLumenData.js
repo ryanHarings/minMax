@@ -20,6 +20,11 @@ const ulW = {
   F24: 71,
   F36: 169,
   F48: 249,
+  F14D: 25,
+  F18D: 36,
+  F24D: 71,
+  F36D: 169,
+  F48D: 249,
   F60: 251,
   F72: 380,
   TRO11: 25, //roughly
@@ -50,6 +55,9 @@ const fixBoardCounts = {
   F36B_IND: 8,
   F48B_DIR: 42,
   F48B_IND: 16,
+  F24D_IND: 4,
+  F36D_IND: 8,
+  F48D_IND: 12,
   F60: 56,
   F72: 80,
   LF11: 1,
@@ -69,20 +77,20 @@ const fixtures = {
       ulLimit: ulW.C,
       boardID: 4 //line2
     },
-    E2: {
-      shielding: {
-        A:	0.5365
-      },
-      ulLimit: ulW.EV,
-      boardID: 1 //bar,line,area
-    },
-    E4: {
-      shielding: {
-        A:	0.6110
-      },
-      ulLimit: ulW.EV,
-      boardID: 1 //bar,line,area
-    },
+    // E2: {
+    //   shielding: {
+    //     A:	0.5365
+    //   },
+    //   ulLimit: ulW.EV,
+    //   boardID: 1 //bar,line,area
+    // },
+    // E4: {
+    //   shielding: {
+    //     A:	0.6110
+    //   },
+    //   ulLimit: ulW.EV,
+    //   boardID: 1 //bar,line,area
+    // },
     // ET4: {
       // shielding: {
         // A: 0.634,
@@ -258,30 +266,30 @@ const fixtures = {
       ulLimit: ulW.EX1B,
       boardID: 4 //bar,line,area
     },
-    EX2: {
-      shielding: {
-        DIR: {
-          A: 0.5365
-        },
-        IND: {
-          O: 0.8092
-        }
-      },
-      ulLimit: ulW.EX,
-      boardID: 1 //bar,line,area
-    },
-    EX2B: {
-      shielding: {
-        DIR: {
-          A: 0.4745
-        },
-        IND: {
-          O: 0.8373
-        }
-      },
-      ulLimit: ulW.EX,
-      boardID: 1 //bar,line,area
-    },
+    // EX2: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.5365
+    //     },
+    //     IND: {
+    //       O: 0.8092
+    //     }
+    //   },
+    //   ulLimit: ulW.EX,
+    //   boardID: 1 //bar,line,area
+    // },
+    // EX2B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.4745
+    //     },
+    //     IND: {
+    //       O: 0.8373
+    //     }
+    //   },
+    //   ulLimit: ulW.EX,
+    //   boardID: 1 //bar,line,area
+    // },
     EX3: {
       shielding: {
         A: 0.545,
@@ -456,18 +464,18 @@ const fixtures = {
       },
       boardID: 5 //ll
     },
-    EX4: {
-      shielding: {
-        DIR: {
-          A: 0.5731
-        },
-        IND: {
-          O: 0.8865
-        }
-      },
-      ulLimit: ulW.EX,
-      boardID: 1 //bar,line,area
-    },
+    // EX4: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.5731
+    //     },
+    //     IND: {
+    //       O: 0.8865
+    //     }
+    //   },
+    //   ulLimit: ulW.EX,
+    //   boardID: 1 //bar,line,area
+    // },
     EX33: {
       shielding: {
         DIR: {
@@ -492,18 +500,18 @@ const fixtures = {
       ulLimit: ulW.EXXX,
       boardID: 1 //bar,line,area
     },
-    EX4B: {
-      shielding: {
-        DIR: {
-          A: 0.5742
-        },
-        IND: {
-          O: 0.8943
-        }
-      },
-      ulLimit: ulW.EX,
-      boardID: 1 //bar,line,area
-    },
+    // EX4B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.5742
+    //     },
+    //     IND: {
+    //       O: 0.8943
+    //     }
+    //   },
+    //   ulLimit: ulW.EX,
+    //   boardID: 1 //bar,line,area
+    // },
     EX6: {
       shielding: {
         A: 0.6886,
@@ -558,19 +566,19 @@ const fixtures = {
       },
       boardID: 1 //bar,line,area
     },
-    L6A: {
-      shielding: {
-        "100": 0.6778,
-        "75": 0.7608,
-        "35": 0.6726
-      },
-      ulLimit: ulW.L6,
-      boardID: {
-        "100": 1, //bar,line,area
-        "75": 1,
-        "35": 2 //line22
-      }
-    },
+    // L6A: {
+    //   shielding: {
+    //     "100": 0.6778,
+    //     "75": 0.7608,
+    //     "35": 0.6726
+    //   },
+    //   ulLimit: ulW.L6,
+    //   boardID: {
+    //     "100": 1, //bar,line,area
+    //     "75": 1,
+    //     "35": 2 //line22
+    //   }
+    // },
     'L6D/I': {
       shielding: {
         DIR: {
@@ -613,14 +621,16 @@ const fixtures = {
       shielding: {
         A: 0.704,
         HE: 0.778,
-        P: 0.575
+        P: 0.575,
+        WHE: 0.735
       },
       ulLimit: ulW.M,
       boardID: 5 //ll
     },
     MW: {
       shielding: {
-        HE: 0.851
+        HE: 0.851,
+        WHE: 0.727
       },
       ulLimit: ulW.M,
       boardID: 5 //ll
@@ -747,95 +757,201 @@ const fixtures = {
       boardCount: fixBoardCounts.TRO24,
       boardID: 3 //bar22
     },
-    F14: {
+    // F14: {
+    //   shielding: {
+    //     A: 0.5725
+    //   },
+    //   ulLimit: ulW.F14,
+    //   boardCount: fixBoardCounts.F14,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F18: {
+    //   shielding: {
+    //     A: 0.6325,
+    //     U: 0.6425
+    //   },
+    //   ulLimit: ulW.F18,
+    //   boardCount: fixBoardCounts.F18,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F24: {
+    //   shielding: {
+    //     A: 0.5988,
+    //     U: 0.645
+    //   },
+    //   ulLimit: ulW.F24,
+    //   boardCount: fixBoardCounts.F24B_DIR,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F24B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.63
+    //     },
+    //     IND: {
+    //       A: 0.6075
+    //     }
+    //   },
+    //   ulLimit: ulW.F24,
+    //   boardCount: {
+    //     DIR: fixBoardCounts.F24B_DIR,
+    //     IND: fixBoardCounts.F24B_IND
+    //   },
+    //   boardID: 1 //bar,line,area
+    // },
+    // F36: {
+    //   shielding: {
+    //     A: 0.6175,
+    //     U: 0.6263
+    //   },
+    //   ulLimit: ulW.F36,
+    //   boardCount: fixBoardCounts.F36B_DIR,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F36B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.6325
+    //     },
+    //     IND: {
+    //       A: 0.615
+    //     }
+    //   },
+    //   ulLimit: ulW.F36,
+    //   boardCount: {
+    //     DIR: fixBoardCounts.F36B_DIR,
+    //     IND: fixBoardCounts.F36B_IND
+    //   },
+    //   boardID: 1 //bar,line,area
+    // },
+    // F48: {
+    //   shielding: {
+    //     A: 0.5963,
+    //     U: 0.6175
+    //   },
+    //   ulLimit: ulW.F48,
+    //   boardCount: fixBoardCounts.F48B_DIR,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F48B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.6175
+    //     },
+    //     IND: {
+    //       A: 0.6125
+    //     }
+    //   },
+    //   ulLimit: ulW.F48,
+    //   boardCount: {
+    //     DIR: fixBoardCounts.F48B_DIR,
+    //     IND: fixBoardCounts.F48B_IND
+    //   },
+    //   boardID: 1 //bar,line,area
+    // },
+    F14D: {
       shielding: {
-        A: 0.5725
+        A: 0.73,
+        AL: 0.73,
+        AR: 0.73
       },
       ulLimit: ulW.F14,
-      boardCount: fixBoardCounts.F14,
+      wattAdj: .97,
+      boardCount: 5,
+      thermalLimits: {
+        DIR: [20,105]
+      },
       boardID: 1 //bar,line,area
     },
-    F18: {
+    F18D: {
       shielding: {
-        A: 0.6325,
-        U: 0.6425
+        A: 0.74,
+        AL: 0.74,
+        AR: 0.74
       },
       ulLimit: ulW.F18,
-      boardCount: fixBoardCounts.F18,
-      boardID: 1 //bar,line,area
-    },
-    F24: {
-      shielding: {
-        A: 0.5988,
-        U: 0.645
+      wattAdj: .97,
+      boardCount: 9,
+      thermalLimits: {
+        DIR: [20,105]
       },
-      ulLimit: ulW.F24,
-      boardCount: fixBoardCounts.F24B_DIR,
       boardID: 1 //bar,line,area
     },
-    F24B: {
+    "F24D/I": {
       shielding: {
         DIR: {
-          A: 0.63
+          A: 0.744,
+          AL: 0.744,
+          AR: 0.744
         },
         IND: {
-          A: 0.6075
+          LO: 0.877
         }
       },
-      ulLimit: ulW.F24,
+      ulLimit: ulW.F24D,
+      wattAdj: {
+        DIR: .97,
+        IND: .95
+      },
       boardCount: {
-        DIR: fixBoardCounts.F24B_DIR,
-        IND: fixBoardCounts.F24B_IND
+        DIR: 9,
+        IND: fixBoardCounts.F24D_IND
+      },
+      thermalLimits: {
+        DIR: [20,105],
+        IND: [17,83]
       },
       boardID: 1 //bar,line,area
     },
-    F36: {
-      shielding: {
-        A: 0.6175,
-        U: 0.6263
-      },
-      ulLimit: ulW.F36,
-      boardCount: fixBoardCounts.F36B_DIR,
-      boardID: 1 //bar,line,area
-    },
-    F36B: {
+    "F36D/I": {
       shielding: {
         DIR: {
-          A: 0.6325
+          A: 0.758,
+          AL: 0.758,
+          AR: 0.758
         },
         IND: {
-          A: 0.615
+          LO: 0.861
         }
       },
-      ulLimit: ulW.F36,
+      ulLimit: ulW.F36D,
+      wattAdj: {
+        DIR: 1.01,
+        IND: 1
+      },
       boardCount: {
-        DIR: fixBoardCounts.F36B_DIR,
-        IND: fixBoardCounts.F36B_IND
+        DIR: 27,
+        IND: fixBoardCounts.F36D_IND
+      },
+      thermalLimits: {
+        DIR: [20,105],
+        IND: [17,83]
       },
       boardID: 1 //bar,line,area
     },
-    F48: {
-      shielding: {
-        A: 0.5963,
-        U: 0.6175
-      },
-      ulLimit: ulW.F48,
-      boardCount: fixBoardCounts.F48B_DIR,
-      boardID: 1 //bar,line,area
-    },
-    F48B: {
+    "F48D/I": {
       shielding: {
         DIR: {
-          A: 0.6175
+          A: 0.77,
+          AL: 0.77,
+          AR: 0.77
         },
         IND: {
-          A: 0.6125
+          LO: 0.864
         }
       },
-      ulLimit: ulW.F48,
+      ulLimit: ulW.F48D,
+      wattAdj: {
+        DIR: 1.025,
+        IND: .99
+      },
       boardCount: {
-        DIR: fixBoardCounts.F48B_DIR,
-        IND: fixBoardCounts.F48B_IND
+        DIR: 57,
+        IND: fixBoardCounts.F48D_IND
+      },
+      thermalLimits: {
+        DIR: [20,105],
+        IND: [17,83]
       },
       boardID: 1 //bar,line,area
     },
@@ -855,53 +971,209 @@ const fixtures = {
       boardCount: fixBoardCounts.F72,
       boardID: 1 //bar,line,area
     },
-    LF11: {
+    LF11D: {
       shielding: {
-        A: 0.6131
+        A: 0.75,
+        AL: 0.75,
+        AR: 0.75
       },
-      ulLimit: ulW.ARE11,
-      boardCount: fixBoardCounts.LF11,
+      ulLimit: 5,
+      wattAdj: 1,
+      boardCount: 1,
+      thermalLimits: {
+        DIR: [50,400]
+      },
       boardID: 1 //bar,line,area
     },
-    LF12: {
+    LF12D: {
       shielding: {
-        A: 0.6582
+        A: 0.751,
+        AL: 0.751,
+        AR: 0.751
       },
-      ulLimit: ulW.ARE12,
-      boardCount: fixBoardCounts.LF12,
+      ulLimit: 10,
+      wattAdj: 1,
+      boardCount: 2,
+      thermalLimits: {
+        DIR: [50,500]
+      },
       boardID: 1 //bar,line,area
     },
-    LF14: {
+    "LF14D/I": {
       shielding: {
-        A: 0.677
+        // DIR: {
+        //   A: 0.79,
+        //   AL: 0.79,
+        //   AR: 0.79
+        // },
+        // IND: {
+        //   LO: 0.936
+        // }
+        DIR: {
+          A: 1,
+          AL: 1,
+          AR: 1
+        },
+        IND: {
+          LO: 1
+        }
       },
-      ulLimit: ulW.ARE14,
-      boardCount: fixBoardCounts.LF14,
+      ulLimit: 30,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardCount: {
+        DIR: 4,
+        IND: 4
+      },
+      thermalLimits: {
+        DIR: [50,500],
+        IND: [50,300]
+      },
       boardID: 1 //bar,line,area
     },
-    LF22: {
+    "LF22D/I": {
       shielding: {
-        A: 0.7004
+        // DIR: {
+        //   A: 0.82,
+        //   AL: 0.82,
+        //   AR: 0.82
+        // },
+        // IND: {
+        //   LO: 0.933
+        // }
+        DIR: {
+          A: 1,
+          AL: 1,
+          AR: 1
+        },
+        IND: {
+          LO: 1
+        }
       },
-      ulLimit: ulW.ARE22,
-      boardCount: fixBoardCounts.LF22,
+      ulLimit: 60,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardCount: {
+        DIR: 4,
+        IND: 4
+      },
+      thermalLimits: {
+        DIR: [50,500],
+        IND: [50,300]
+      },
       boardID: 1 //bar,line,area
     },
-    LF24: {
+    "LF24D/I": {
       shielding: {
-        A: 0.7125
+        // DIR: {
+        //   A: 0.791,
+        //   AL: 0.791,
+        //   AR: 0.791
+        // },
+        // IND: {
+        //   LO: 0.90
+        // }
+        DIR: {
+          A: 1,
+          AL: 1,
+          AR: 1
+        },
+        IND: {
+          LO: 1
+        }
       },
-      ulLimit: ulW.ARE24,
-      boardCount: fixBoardCounts.LF24,
+      ulLimit: 200,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardCount: {
+        DIR: 8,
+        IND: 8
+      },
+      thermalLimits: {
+        DIR: [50,500],
+        IND: [50,300]
+      },
       boardID: 1 //bar,line,area
     },
-    LF44: {
+    "LF44D/I": {
       shielding: {
-        A: 0.6702
+        DIR: {
+          A: 0.797,
+          AL: 0.797,
+          AR: 0.797
+        },
+        IND: {
+          LO: 0.96
+        }
       },
-      ulLimit: ulW.ARE44,
-      boardCount: fixBoardCounts.LF44,
+      ulLimit: 200,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardCount: {
+        DIR: 16,
+        IND: 12
+      },
+      thermalLimits: {
+        DIR: [50,500],
+        IND: [50,300]
+      },
       boardID: 1 //bar,line,area
     }
+    // LF11: {
+    //   shielding: {
+    //     A: 0.6131
+    //   },
+    //   ulLimit: ulW.ARE11,
+    //   boardCount: fixBoardCounts.LF11,
+    //   boardID: 1 //bar,line,area
+    // },
+    // LF12: {
+    //   shielding: {
+    //     A: 0.6582
+    //   },
+    //   ulLimit: ulW.ARE12,
+    //   boardCount: fixBoardCounts.LF12,
+    //   boardID: 1 //bar,line,area
+    // },
+    // LF14: {
+    //   shielding: {
+    //     A: 0.677
+    //   },
+    //   ulLimit: ulW.ARE14,
+    //   boardCount: fixBoardCounts.LF14,
+    //   boardID: 1 //bar,line,area
+    // },
+    // LF22: {
+    //   shielding: {
+    //     A: 0.7004
+    //   },
+    //   ulLimit: ulW.ARE22,
+    //   boardCount: fixBoardCounts.LF22,
+    //   boardID: 1 //bar,line,area
+    // },
+    // LF24: {
+    //   shielding: {
+    //     A: 0.7125
+    //   },
+    //   ulLimit: ulW.ARE24,
+    //   boardCount: fixBoardCounts.LF24,
+    //   boardID: 1 //bar,line,area
+    // },
+    // LF44: {
+    //   shielding: {
+    //     A: 0.6702
+    //   },
+    //   ulLimit: ulW.ARE44,
+    //   boardCount: fixBoardCounts.LF44,
+    //   boardID: 1 //bar,line,area
+    // }
   }
 };

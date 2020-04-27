@@ -49,6 +49,12 @@ $('.fixture').click(function(){
 
   selection.family = $(this).attr('data-family');
   selection.fixture = $(this).attr('id');
+  if (fixtures[selection.family][selection.fixture].thermalLimits !== undefined) {
+    selection.dirWattAdj = typeof fixtures[selection.family][selection.fixture].wattAdj === "object" ? fixtures[selection.family][selection.fixture].wattAdj["DIR"] : fixtures[selection.family][selection.fixture].wattAdj;
+    selection.indWattAdj = fixtures[selection.family][selection.fixture].wattAdj["IND"];
+    selection.dirThermLim = fixtures[selection.family][selection.fixture].thermalLimits["DIR"];
+    selection.indThermLim = fixtures[selection.family][selection.fixture].thermalLimits["IND"];
+  }
 
   var selectedFixtureShielding = fixtures[selection.family][selection.fixture].shielding;
   Object.keys(selectedFixtureShielding).forEach(function(key) {
@@ -144,38 +150,68 @@ $('.led > article').on('click', '.temp > .temp',function() {
   } else {
     selection.color = $(this).attr('data-temp');
   }
-  
-  var outputData = getOutput(selection);
 
   $('.led > article > .inputSection').show();
   $('.inputSection > .customDirect').show();
   $('.inputSection > .customIndirect').show();
 
-  if (outputData.hasOwnProperty('direct')) {
-    if (!outputData.hasOwnProperty('indirect')) {
-      $('.inputSection > .customIndirect').hide();
-    }
-    selection.directMaxLumens = Math.floor10(outputData.direct.maxLumen * selection.directBoardCount * selection.directEff, 1);
-    selection.directMaxWattage = Math.ceil10(outputData.direct.maxWatt * selection.directBoardCount, -1);
-    selection.directMaxBoardWattage = Math.ceil10(outputData.direct.maxBoardWatt * selection.directBoardCount, -1);
-    selection.directMinLumens = Math.ceil10(outputData.minLumen * selection.directBoardCount * selection.directEff, 1);
-    selection.directMinWattage = Math.ceil10(outputData.direct.minWatt * selection.directBoardCount, -1);
-    selection.directMinBoardWattage = Math.ceil10(outputData.minBoardWatt * selection.directBoardCount, -1);
-    selection.directmA = outputData.direct.mA * selection.directBoardCount;
-  };
-  
-  if (outputData.hasOwnProperty('indirect')) {
-    if (!outputData.hasOwnProperty('direct')) {
-      $('.inputSection > .customDirect').hide();
-    }
-    selection.indirectMaxLumens = Math.floor10(outputData.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
-    selection.indirectMaxWattage = Math.ceil10(outputData.indirect.maxWatt * selection.indirectBoardCount, -1);
-    selection.indirectMaxBoardWattage = Math.ceil10(outputData.indirect.maxBoardWatt * selection.indirectBoardCount, -1);
-    selection.indirectMinLumens = Math.ceil10(outputData.minLumen * selection.indirectBoardCount * selection.indirectEff, 1);
-    selection.indirectMinWattage = Math.ceil10(outputData.indirect.minWatt * selection.indirectBoardCount, -1);
-    selection.indirectMinBoardWattage = Math.ceil10(outputData.minBoardWatt * selection.indirectBoardCount, -1);
-    selection.indirectmA = outputData.indirect.mA * selection.indirectBoardCount;
-  };
+  console.log(selection)
+
+  if (selection.dirThermLim !== undefined || selection.indThermLim !== undefined) {
+    var outputData = getMinMax(selection)
+
+    if (outputData.hasOwnProperty('direct')) {
+      if (!outputData.hasOwnProperty('indirect')) {
+        $('.inputSection > .customIndirect').hide();
+      }
+      selection.directMaxLumens = Math.floor10(outputData.direct.maxLumen, 1);
+      selection.directMaxWattage = Math.ceil10(outputData.direct.maxWatt, -1);
+      selection.directMaxBoardWattage = Math.ceil10(outputData.direct.maxBoardWatt, -1);
+      selection.directMinLumens = Math.ceil10(outputData.direct.minLumen, 1);
+      selection.directMinWattage = Math.ceil10(outputData.direct.minWatt, -1);
+      selection.directMinBoardWattage = Math.ceil10(outputData.direct.minBoardWatt, -1);
+    };
+    
+    if (outputData.hasOwnProperty('indirect')) {
+      if (!outputData.hasOwnProperty('direct')) {
+        $('.inputSection > .customDirect').hide();
+      }
+      selection.indirectMaxLumens = Math.floor10(outputData.indirect.maxLumen, 1);
+      selection.indirectMaxWattage = Math.ceil10(outputData.indirect.maxWatt, -1);
+      selection.indirectMaxBoardWattage = Math.ceil10(outputData.indirect.maxBoardWatt, -1);
+      selection.indirectMinLumens = Math.ceil10(outputData.indirect.minLumen, 1);
+      selection.indirectMinWattage = Math.ceil10(outputData.indirect.minWatt, -1);
+      selection.indirectMinBoardWattage = Math.ceil10(outputData.indirect.minBoardWatt, -1);
+    };
+  } else {
+    var outputData = getOutput(selection);
+
+    if (outputData.hasOwnProperty('direct')) {
+      if (!outputData.hasOwnProperty('indirect')) {
+        $('.inputSection > .customIndirect').hide();
+      }
+      selection.directMaxLumens = Math.floor10(outputData.direct.maxLumen * selection.directBoardCount * selection.directEff, 1);
+      selection.directMaxWattage = Math.ceil10(outputData.direct.maxWatt * selection.directBoardCount, -1);
+      selection.directMaxBoardWattage = Math.ceil10(outputData.direct.maxBoardWatt * selection.directBoardCount, -1);
+      selection.directMinLumens = Math.ceil10(outputData.minLumen * selection.directBoardCount * selection.directEff, 1);
+      selection.directMinWattage = Math.ceil10(outputData.direct.minWatt * selection.directBoardCount, -1);
+      selection.directMinBoardWattage = Math.ceil10(outputData.minBoardWatt * selection.directBoardCount, -1);
+      selection.directmA = outputData.direct.mA * selection.directBoardCount;
+    };
+    
+    if (outputData.hasOwnProperty('indirect')) {
+      if (!outputData.hasOwnProperty('direct')) {
+        $('.inputSection > .customDirect').hide();
+      }
+      selection.indirectMaxLumens = Math.floor10(outputData.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
+      selection.indirectMaxWattage = Math.ceil10(outputData.indirect.maxWatt * selection.indirectBoardCount, -1);
+      selection.indirectMaxBoardWattage = Math.ceil10(outputData.indirect.maxBoardWatt * selection.indirectBoardCount, -1);
+      selection.indirectMinLumens = Math.ceil10(outputData.minLumen * selection.indirectBoardCount * selection.indirectEff, 1);
+      selection.indirectMinWattage = Math.ceil10(outputData.indirect.minWatt * selection.indirectBoardCount, -1);
+      selection.indirectMinBoardWattage = Math.ceil10(outputData.minBoardWatt * selection.indirectBoardCount, -1);
+      selection.indirectmA = outputData.indirect.mA * selection.indirectBoardCount;
+    };
+  }
 
   var directInverseLumen;
   var directInverseWatt;
@@ -183,7 +219,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
   var indirectInverseWatt;
 
   //if there are any watts remaining for use on inverse side
-  if (selection.hasOwnProperty('directShielding') && selection.hasOwnProperty('indirectShielding') && selection.fixture.charAt(0) !== 'F') {
+  if (selection.hasOwnProperty('directShielding') && selection.hasOwnProperty('indirectShielding') && (selection.dirThermLim === undefined && selection.indThermLim === undefined)) {
     
     // if (selection.fixture !== 'L6D/I' && selection.fixture !== 'L8D/I') {
     if (selection.fixture) {
@@ -200,16 +236,15 @@ $('.led > article').on('click', '.temp > .temp',function() {
         }
       }
     }
-    console.log('before:', selection)
     selection.indirectRemMaxLumens = Math.floor10(inverseData.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
     selection.indirectRemMaxWattage = Math.ceil10(inverseData.indirect.maxWatt * selection.indirectBoardCount, -1);
 
     selection.directRemMaxLumens = Math.floor10(inverseData.direct.maxLumen * selection.directBoardCount * selection.directEff, 1);
     selection.directRemMaxWattage = Math.ceil10(inverseData.direct.maxWatt * selection.directBoardCount, -1);
 
-    directInverseLumen = ' (ind: ' + selection.indirectRemMaxLumens + ')';
+    directInverseLumen = ' (max ind: ' + selection.indirectRemMaxLumens + ')';
     directInverseWatt = ' (ind: ' + selection.indirectRemMaxWattage + ')';
-    indirectInverseLumen = ' (dir: ' + selection.directRemMaxLumens + ')';
+    indirectInverseLumen = ' (max dir: ' + selection.directRemMaxLumens + ')';
     indirectInverseWatt = ' (dir: ' + selection.directRemMaxWattage + ')';
 
   } else {
@@ -219,8 +254,8 @@ $('.led > article').on('click', '.temp > .temp',function() {
     indirectInverseWatt = '';
   };
 
-  var lumenLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lumens total @ ';
-  var wattLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
+  var lumenLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lm total @ ';
+  var wattLabel = selection.family === 'LIN' ? ' W/ft' : ' W total';
 
   var fixtureName;
   if (selection.fixture === 'EX2D/I' || selection.fixture === 'EX3D/I' || selection.fixture === 'EX4D/I') {
@@ -266,16 +301,16 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $('.outputSection').append('<article class="output' + buttonNum + ' outputCard"></article>');
   $('article.output' + buttonNum).append('<div class="output' + buttonNum + ' catolog">' + fixtureName + shieldingName + criName + selection.color + '</div>');
   if (outputData.hasOwnProperty('direct')) {
-    if (selection.fixture.charAt(0) === 'F') {
-      $('article.output' + buttonNum).append('<div class="directMax"><span>Dir Max:</span> See spec sheet</div>');
+    // if (selection.fixture.charAt(0) === 'F' && selection.fixture.match(/\d+/)[0] > 36) {
+      // $('article.output' + buttonNum).append('<div class="directMax"><span>Dir Max:</span> See spec sheet</div>');
 
-    } else {
+    // } else {
       $('article.output' + buttonNum).append('<div class="directMax"><span>Dir Max:</span> ' + selection.directMaxLumens + directInverseLumen + lumenLabel + selection.directMaxWattage + directInverseWatt + wattLabel + '</div>');
     }
     $('article.output' + buttonNum).append('<div class="directMin"><span>Dir Min:</span> ' + selection.directMinLumens + lumenLabel + selection.directMinWattage + wattLabel + '</div>');
-  }
+  // }
   if (outputData.hasOwnProperty('indirect')) {
-    if (selection.fixture.charAt(0) === 'F') {
+    if (selection.fixture.charAt(0) === 'F' && selection.fixture.match(/\d+/)[0] > 36) {
       $('article.output' + buttonNum).append('<div class="indirectMax"><span>Ind Max:</span> See spec sheet</div>');
 
     } else {
@@ -330,28 +365,51 @@ $('.led').on('click','.inputSection > .clButton',function() {
     $('#indirectTarget').val([]);
   }
   
-  var customOutput = getOutput(selection);
+  if (selection.dirThermLim !== undefined || selection.indThermLim !== undefined) {
+    if (selection.customUnit === "Lumens" && (selection.directTarget > selection.directMaxLumens || selection.directTarget < selection.directMinLumens || selection.indirectTarget > selection.indirectMaxLumens || selection.indirectTarget < selection.indirectMinLumens)) {
+      $('#modal1').modal('open');
+    } else if (selection.customUnit === "Watts" && (selection.directTarget > selection.directMaxWattage || selection.directTarget < selection.directMinWattage || selection.indirectTarget > selection.indirectMaxWattage || selection.indirectTarget < selection.indirectMinWattage)) {
+      $('#modal1').modal('open');
+    } else {
+      var customOutput = getCustomOutput(selection);
 
-  if (customOutput.hasOwnProperty('direct')) {
-    selection.directCustomLumens = Math.round(customOutput.direct.maxLumen * selection.directBoardCount * selection.directEff, 1);
-    selection.directCustomWattage = Math.ceil10(customOutput.direct.maxWatt * selection.directBoardCount, -1);
-    selection.directCustomBoardWattage = Math.ceil10(customOutput.direct.maxBoardWatt * selection.directBoardCount, -1);
-    selection.directCustommA = customOutput.direct.mA * selection.directBoardCount;
-  };
-  if (customOutput.hasOwnProperty('indirect')) {
-    selection.indirectCustomLumens = Math.round(customOutput.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
-    selection.indirectCustomWattage = Math.ceil10(customOutput.indirect.maxWatt * selection.indirectBoardCount, -1);
-    selection.indirectCustomBoardWattage = Math.ceil10(customOutput.indirect.maxBoardWatt * selection.indirectBoardCount, -1);
-    selection.indirectCustommA = customOutput.indirect.mA * selection.indirectBoardCount;
-  };
+      if (customOutput.hasOwnProperty('direct')) {
+        selection.directCustomLumens = Math.round(customOutput.direct.maxLumen, 1);
+        selection.directCustomWattage = Math.ceil10(customOutput.direct.maxWatt, -1);
+        selection.directCustomBoardWattage = Math.ceil10(customOutput.direct.maxBoardWatt, -1);
+        selection.directCustommA = customOutput.direct.mA * selection.directBoardCount;
+      };
+      if (customOutput.hasOwnProperty('indirect')) {
+        selection.indirectCustomLumens = Math.round(customOutput.indirect.maxLumen, 1);
+        selection.indirectCustomWattage = Math.ceil10(customOutput.indirect.maxWatt, -1);
+        selection.indirectCustomBoardWattage = Math.ceil10(customOutput.indirect.maxBoardWatt, -1);
+        selection.indirectCustommA = customOutput.indirect.mA * selection.indirectBoardCount;
+      };
+    }
+  } else {
+    var customOutput = getOutput(selection);
 
-  if (validateCustomOutput(selection)) {
+    if (customOutput.hasOwnProperty('direct')) {
+      selection.directCustomLumens = Math.round(customOutput.direct.maxLumen * selection.directBoardCount * selection.directEff, 1);
+      selection.directCustomWattage = Math.ceil10(customOutput.direct.maxWatt * selection.directBoardCount, -1);
+      selection.directCustomBoardWattage = Math.ceil10(customOutput.direct.maxBoardWatt * selection.directBoardCount, -1);
+      selection.directCustommA = customOutput.direct.mA * selection.directBoardCount;
+    };
+    if (customOutput.hasOwnProperty('indirect')) {
+      selection.indirectCustomLumens = Math.round(customOutput.indirect.maxLumen * selection.indirectBoardCount * selection.indirectEff, 1);
+      selection.indirectCustomWattage = Math.ceil10(customOutput.indirect.maxWatt * selection.indirectBoardCount, -1);
+      selection.indirectCustomBoardWattage = Math.ceil10(customOutput.indirect.maxBoardWatt * selection.indirectBoardCount, -1);
+      selection.indirectCustommA = customOutput.indirect.mA * selection.indirectBoardCount;
+    };
+  }
+
+  if (selection.dirThermLim !== undefined || selection.indThermLim !== undefined || validateCustomOutput(selection)) {
     $('.led > article > .inputSection').hide();
     $('.temp > div').removeClass('selected');
 
-    var LumensLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lumens total @ ';
-    var WattsLabel = selection.family === 'LIN' ? ' W/ft' : ' watts total';
-    var mALabel = selection.family === 'LIN' ? ' mA/ft @ ' : ' mA total @ ';
+    var LumensLabel = selection.family === 'LIN' ? ' lm/ft @ ' : ' lm total @ ';
+    var WattsLabel = selection.family === 'LIN' ? ' W/ft' : ' W total';
+    var mALabel = selection.family === 'LIN' ? ' mA/ft' : ' mA total';
 
     var customCat = $('.output' + (buttonNum - 1) + '.catolog').text();
 
@@ -359,14 +417,16 @@ $('.led').on('click','.inputSection > .clButton',function() {
       customCat += '-' + selection.directTarget;
 
       $('<div class="directCO"><span>Dir Custom:</span> ' + selection.directCustomLumens + LumensLabel + selection.directCustomWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + ' > .directMin');
-      $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + selection.directCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      // $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + selection.directCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      $('<div class="directProg"><span>Dir Driver Output:</span> ' + selection.directCustommA + mALabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
 
     }
     if (customOutput.hasOwnProperty('indirect')) {
       customCat += '-' + selection.indirectTarget;
 
       $('<div class="indirectCO"><span>Ind Custom:</span> ' + selection.indirectCustomLumens + LumensLabel + selection.indirectCustomWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + ' > .indirectMin');
-      $('<div class="indirectProg"><span>Ind Driver Output:</span> ' + selection.indirectCustommA + mALabel + selection.indirectCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      // $('<div class="indirectProg"><span>Ind Driver Output:</span> ' + selection.indirectCustommA + mALabel + selection.indirectCustomBoardWattage + WattsLabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+      $('<div class="indirectProg"><span>Ind Driver Output:</span> ' + selection.indirectCustommA + mALabel + '</div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
     }
     $('.output' + (buttonNum - 1) + '.catolog').text(customCat);
 
@@ -400,129 +460,6 @@ function validateCustomOutput(fixParam) {
     return fixParam.indirectTarget <= fixParam['indirectMax' + unit] && fixParam.indirectTarget >= fixParam['indirectMin' + unit];
   }
 };
-
-function getOutput(fixObject) {
-  
-  var boardData;
-  if (fixObject.boardID === 1) {boardData = barLineArea;}
-  else if (fixObject.boardID === 2) {boardData = linero22;}
-  else if (fixObject.boardID === 3) {boardData = bar22;}
-  else if (fixObject.boardID === 4) {boardData = line2;}
-  else if (fixObject.boardID === 5) {boardData = ll;};
-
-  var criMultiplier = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
-  if (fixObject.boardID > 3 || fixObject.color === '27k') {
-    criMultiplier = 1;
-  }
-
-  var outputObject = {};
-
-  var linBoardCount = fixObject.directShielding === '35' ? 4 : fixObject.fixture === 'L6D/I' ? 16 : fixObject.fixture === 'L8D/I' ? 16 : fixObject.fixture.includes('D') && fixObject.directShielding!=="WET" ? 4 : 6;
-  // console.log(linBoardCount)
-  Object.keys(boardData).forEach((key) => {
-    var boardDataLine = boardData[key]
-    var directmA = fixObject.family === 'LIN' ? linBoardCount * Number(boardDataLine.mA) : fixObject.directBoardCount * Number(boardDataLine.mA);
-    var indirectmA = fixObject.family === 'LIN' ? directmA / (linBoardCount === 16 ? 2 : 1) : fixObject.indirectBoardCount * Number(boardDataLine.mA);
-    var directWatts = (boardDataLine.boardWattage / driverEff(fixObject.boardID, directmA, fixObject.ulW)) * fixObject.directBoardCount;
-    var indirectWatts = (boardDataLine.boardWattage / driverEff(fixObject.boardID, indirectmA, fixObject.ulW)) * fixObject.indirectBoardCount;
-    
-    if (outputFilter(directWatts, boardDataLine, fixObject.directTarget, fixObject.directEff, fixObject.directBoardCount, criMultiplier, 'direct', fixObject)) {
-      if (!outputObject.hasOwnProperty('direct')) {
-        outputObject.direct = {};
-      }
-      outputObject.direct.maxLumen = Number(boardDataLine[fixObject.color]) * criMultiplier;
-      outputObject.direct.maxWatt = directWatts / fixObject.directBoardCount;
-      outputObject.direct.mA = Number(boardDataLine.mA);
-      outputObject.direct.maxBoardWatt = Number(boardDataLine.boardWattage);
-    }
-    if (outputFilter(indirectWatts, boardDataLine, fixObject.indirectTarget, fixObject.indirectEff, fixObject.indirectBoardCount, criMultiplier, 'indirect', fixObject)) {
-      if (!outputObject.hasOwnProperty('indirect')) {
-        outputObject.indirect = {};
-      }
-      outputObject.indirect.maxLumen = Number(boardDataLine[fixObject.color]) * criMultiplier;
-      outputObject.indirect.maxWatt = indirectWatts / fixObject.indirectBoardCount;
-      outputObject.indirect.mA = Number(boardDataLine.mA);
-      outputObject.indirect.maxBoardWatt = Number(boardDataLine.boardWattage);
-    }
-    if (boardDataLine.mA === '50' && !fixObject.customUnit) {
-      outputObject.minLumen = outputObject.hasOwnProperty('direct') ? outputObject.direct.maxLumen : outputObject.indirect.maxLumen;
-      outputObject.minBoardWatt = outputObject.hasOwnProperty('direct') ? outputObject.direct.maxBoardWatt : outputObject.indirect.maxBoardWatt;
-      if (outputObject.hasOwnProperty('direct')) {
-        outputObject.direct.minWatt = outputObject.direct.maxWatt;
-      }
-      if (outputObject.hasOwnProperty('indirect')) {
-        outputObject.indirect.minWatt = outputObject.indirect.maxWatt;
-      }
-    };
-  });
-  console.log(outputObject);
-  
-  return outputObject;
-};
-
-function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
-  var inverse = hemi === 'direct' ? 'indirect' : 'direct';
-  if (!selObject.customUnit) {
-    
-    if (selObject.hasOwnProperty(inverse + 'MaxWattage') && selObject.hasOwnProperty(hemi + 'MaxWattage')) {
-      return wVar <= selObject.ulW - selObject[inverse + 'MaxWattage'];
-    } else {
-      if (selObject.fixture === 'EV3D' && wVar <= selObject.ulW) {
-        return Number(lumenD.mA) <= 273;
-      } else if (selObject.fixture === 'EX3D/I' && wVar <= selObject.ulW) {
-        if (hemi === 'direct') {
-          return Number(lumenD.mA) <= 330;
-        } else {
-          return Number(lumenD.mA) <= 325;
-        }
-      } else if (selObject.fixture === 'EV2D' && wVar <= selObject.ulW) {
-        if (selObject.directShielding === "R") {
-          return Number(lumenD.mA) <= 194;
-        } else {
-          return Number(lumenD.mA) <= 238;
-        }
-      } else if (selObject.fixture === 'EX2D/I' && wVar <= selObject.ulW) {
-        if (hemi === 'direct') {
-          return Number(lumenD.mA) <= 288;
-        } else {
-          return Number(lumenD.mA) <= 288;
-        }
-      } else if (selObject.fixture === 'EV4D' && wVar <= selObject.ulW) {
-        if (selObject.directShielding === "R") {
-          return Number(lumenD.mA) <= 206;
-        } else {
-          return Number(lumenD.mA) <= 250;
-        }
-      } else if (selObject.fixture === 'EX4D/I' && wVar <= selObject.ulW) {
-        if (hemi === 'direct') {
-          return Number(lumenD.mA) <= 288;
-        } else {
-          return Number(lumenD.mA) <= 288;
-        }
-      } else if ((selObject.fixture === 'L6D/I' || selObject.fixture === 'L8D/I') && wVar <= selObject.ulW) {
-        if (hemi === 'direct') {
-          return Number(lumenD.mA) <= 287;
-        } else {
-          return Number(lumenD.mA) <= 285;
-        }
-      } else if ((selObject.fixture === 'M' || selObject.fixture === 'MW') && wVar <= selObject.ulW) {
-        return Number(lumenD.mA) <= 312;
-      } else if (selObject.fixture === 'C' && wVar <= selObject.ulW) {
-        return Number(lumenD.mA) <= 287;
-      } else if (selObject.fixture !== 'EV3D' && selObject.fixture !== 'EX3D/I' && selObject.fixture !== 'L6D/I' && selObject.fixture !== 'L8D/I') {
-        return wVar <= selObject.ulW;
-      }
-    }
-  } else if (selObject.customUnit === 'Watts' && cTarget !== undefined) {
-    if (selObject.hasOwnProperty(inverse + 'MaxWattage') && selObject.hasOwnProperty(hemi + 'MaxWattage')) {
-      return wVar <= cTarget - selObject[inverse + 'MaxWattage'];
-    } else {
-      return wVar <= cTarget;
-    }
-  } else if (selObject.customUnit === 'Lumens' && cTarget !== undefined) {
-    return (Math.floor10(Number(lumenD[selObject.color]), 1) <= cTarget / eff / criM / bCount);
-  }
-}
 
 function driverEff(boardType,mA,ul) {
   var driverEff;
