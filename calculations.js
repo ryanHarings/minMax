@@ -12,7 +12,7 @@ function createList(effObject) {
   })
 };
 createList(fixtures);
-// $('#EX12').attr('disabled', 'true')
+// $('[id*="f"]').attr('disabled', 'true')
 
 $('.modal').modal();
 
