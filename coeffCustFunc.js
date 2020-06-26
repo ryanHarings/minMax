@@ -2,6 +2,7 @@ function getMinMax(fixObj) {
     var outputObject = {}
     
     var size = String(fixObj.fixture.match(/\d+/)[0])
+    console.log(fixObj.fixture.match(/\d+/))
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directShielding")) {
@@ -35,7 +36,7 @@ function getCustomOutput(fixObj) {
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directTarget")) {
-        var dirMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.directTarget, "D")
+        var dirMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.directTarget/fixObj.directEff, "D")
 
         outputObject.direct = {}
         outputObject.direct.maxLumen = dirMaxValues[1] * fixObj.directEff
@@ -44,7 +45,7 @@ function getCustomOutput(fixObj) {
 
     }
     if (fixObj.hasOwnProperty("indirectTarget")) {
-        var indMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.indirectTarget, "I")
+        var indMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.indirectTarget/fixObj.indirectEff, "I")
 
         outputObject.indirect = {}
         outputObject.indirect.maxLumen = indMaxValues[1] * fixObj.indirectEff
