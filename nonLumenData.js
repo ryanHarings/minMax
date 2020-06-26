@@ -77,6 +77,30 @@ const fixtures = {
       ulLimit: ulW.C,
       boardID: 4 //line2
     },
+    CD: {
+      shielding: {
+        DIR: {
+          A: 0.718
+        },
+        IND: {
+          BW: 0.818
+        }
+      },
+      ulLimit: 25,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      // boardCount: {
+      //   DIR: 9, //strings
+      //   IND: fixBoardCounts.F24D_IND * 3 //strings
+      // },
+      thermalLimits: {
+        DIR: [100,300],
+        IND: [100,300]
+      },
+      boardID: 1 //bar,line,area
+    },
     // E2: {
     //   shielding: {
     //     A:	0.5365
@@ -857,7 +881,7 @@ const fixtures = {
       },
       ulLimit: ulW.F14,
       wattAdj: .97,
-      boardCount: 5,
+      boardCount: 5, //strings
       thermalLimits: {
         DIR: [20,105]
       },
@@ -871,7 +895,7 @@ const fixtures = {
       },
       ulLimit: ulW.F18,
       wattAdj: .97,
-      boardCount: 9,
+      boardCount: 9, //strings
       thermalLimits: {
         DIR: [20,105]
       },
@@ -894,8 +918,8 @@ const fixtures = {
         IND: .95
       },
       boardCount: {
-        DIR: 9,
-        IND: fixBoardCounts.F24D_IND
+        DIR: 9, //strings
+        IND: fixBoardCounts.F24D_IND * 3 //strings
       },
       thermalLimits: {
         DIR: [20,105],
@@ -920,8 +944,8 @@ const fixtures = {
         IND: 1
       },
       boardCount: {
-        DIR: 27,
-        IND: fixBoardCounts.F36D_IND
+        DIR: 27, //strings
+        IND: fixBoardCounts.F36D_IND * 3 //strings
       },
       thermalLimits: {
         DIR: [20,105],
@@ -946,8 +970,8 @@ const fixtures = {
         IND: .99
       },
       boardCount: {
-        DIR: 57,
-        IND: fixBoardCounts.F48D_IND
+        DIR: 57, //strings
+        IND: fixBoardCounts.F48D_IND * 3 //strings
       },
       thermalLimits: {
         DIR: [20,105],

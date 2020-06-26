@@ -8,14 +8,25 @@ div[id*='EX1'], div[id*='EV1'] {
     opacity: 0.5;
 }
 
-div[id*='F'] {
+/* div[id*='F'] {
   /* -webkit-user-select: none; */
   /* -khtml-user-select: none; */
   /* -moz-user-select: none; */
   /* -ms-user-select: none; */
   /* user-select: none !important; */
-  color: white;
-  opacity: 1;
+  /* color: white; */
+  /* opacity: 1; */
+/* } */
+
+div[id='CD'] {
+  /* -webkit-user-select: none; */
+  /* -khtml-user-select: none; */
+  /* -moz-user-select: none; */
+  /* -ms-user-select: none; */
+  /* user-select: none !important; */
+  pointer-events: none;
+  color: grey;
+  opacity: .5;
 }
 
 /*main look*/
