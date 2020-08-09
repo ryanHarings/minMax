@@ -1,8 +1,8 @@
 function getMinMax(fixObj) {
     var outputObject = {}
     
-    var size = String(fixObj.fixture.match(/\d+/)[0])
-    console.log(fixObj.fixture.match(/\d+/))
+    var size = String(fixObj.fixture.match(/\d+/) ? fixObj.fixture.match(/\d+/)[0] : 1)
+    
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directShielding")) {
@@ -32,7 +32,7 @@ function getMinMax(fixObj) {
 function getCustomOutput(fixObj) {
     var outputObject = {}
     
-    var size = String(fixObj.fixture.match(/\d+/)[0])
+    var size = String(fixObj.fixture.match(/\d+/) ? fixObj.fixture.match(/\d+/)[0] : 1)
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directTarget")) {
@@ -69,7 +69,9 @@ function calculateOutput(coeffArr, targetVal, hemisphere, limit) {
         mA = limit
     }
 
-    watts = Math.round10(parseFloat(coeffArr[1]["a"+hemisphere] * Math.pow(mA, 2)) + parseFloat(coeffArr[1]["b"+hemisphere] * mA) + parseFloat(coeffArr[1]["c"+hemisphere]))
+    watts = parseFloat(coeffArr[1]["a"+hemisphere] * Math.pow(mA, 2)) + parseFloat(coeffArr[1]["b"+hemisphere] * mA) + parseFloat(coeffArr[1]["c"+hemisphere])
+
+    // watts = Math.round10(parseFloat(coeffArr[1]["a"+hemisphere] * Math.pow(mA, 2)) + parseFloat(coeffArr[1]["b"+hemisphere] * mA) + parseFloat(coeffArr[1]["c"+hemisphere]))
     lumens = Math.round10(parseFloat(coeffArr[2]["a"+hemisphere] * Math.pow(mA, 2)) + parseFloat(coeffArr[2]["b"+hemisphere] * mA) + parseFloat(coeffArr[2]["c"+hemisphere]))
     
     // console.log([mA,lumens,watts])
@@ -77,14 +79,24 @@ function calculateOutput(coeffArr, targetVal, hemisphere, limit) {
 }
 
 function getCoef(fixt, fixtSize, coefBoard, targetUnit) {
-    var fixture = fixt.includes("LF") && fixt.includes("D") ? "LFD" : "FND"
+    var fixture = fixt.includes("F") && fixt.includes("D") ? fixt.includes("L") ? "LFD" : "FND" : fixt
     var tableName = fixture.concat(targetUnit === "Watts" ? "wattToMa" : "lumToMa")
     // select the set of coefficients
-    var coefArr = [
-        eval(tableName)[fixtSize][coefBoard], // target to mA
-        eval(fixture.concat("mAToWatt"))[fixtSize][coefBoard], // mA to watt
-        eval(fixture.concat("mAToLum"))[fixtSize][coefBoard] // mA to lumen (actual)
-    ]
+
+    if (fixtSize !== "1") {
+        var coefArr = [
+            eval(tableName)[fixtSize][coefBoard], // target to mA
+            eval(fixture.concat("mAToWatt"))[fixtSize][coefBoard], // mA to watt
+            eval(fixture.concat("mAToLum"))[fixtSize][coefBoard] // mA to lumen (actual)
+        ]
+    } else {
+        var coefArr = [
+            eval(tableName)[coefBoard], // target to mA
+            eval(fixture.concat("mAToWatt"))[coefBoard], // mA to watt
+            eval(fixture.concat("mAToLum"))[coefBoard] // mA to lumen (actual)
+        ]
+    }
+    console.log(coefArr)
     return coefArr
 }
 
