@@ -18,7 +18,7 @@ div[id*='EX1'], div[id*='EV1'] {
   /* opacity: 1; */
 /* } */
 
-div[id='CD'] {
+/* div[id='CD'] {
   /* -webkit-user-select: none; */
   /* -khtml-user-select: none; */
   /* -moz-user-select: none; */
@@ -27,7 +27,7 @@ div[id='CD'] {
   pointer-events: none;
   color: grey;
   opacity: .5;
-}
+}  */
 
 /*main look*/
 

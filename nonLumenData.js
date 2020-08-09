@@ -80,10 +80,12 @@ const fixtures = {
     CD: {
       shielding: {
         DIR: {
-          A: 0.718
+          A: 1
+          // A: 0.718
         },
         IND: {
-          BW: 0.818
+          BW: 1
+          // BW: 0.818
         }
       },
       ulLimit: 25,
@@ -97,7 +99,7 @@ const fixtures = {
       // },
       thermalLimits: {
         DIR: [100,300],
-        IND: [100,300]
+        IND: [30,275]
       },
       boardID: 1 //bar,line,area
     },

@@ -87,7 +87,7 @@ $('.shielding > article').on('click','div > .lens',function() {
   var hemiLabel = hemisphere === 'IND' ? 'indirect' : 'direct';
 
   // if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture.includes('D/I') === 'EX3D/I' && selection.fixture !== 'L6D/I') && selection.fixture !== 'L8D/I' || Number($(this).attr('id').split('_')[1]) > 0) {
-  if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture.includes('D/I') === false) || Number($(this).attr('id').split('_')[1]) > 0) {
+  if ((selection.fixture.split('').reverse()[0] !== 'B' && selection.fixture !== "CD" && selection.fixture.includes('D/I') === false) || Number($(this).attr('id').split('_')[1]) > 0) {
     if (hemiLabel === 'direct') {
       $('.indirect').hide();
     }
