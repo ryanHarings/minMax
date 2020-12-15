@@ -406,7 +406,7 @@ const fixtures = {
         EV3D: ulW.EV,
         WET: ulW.EW
       },
-      boardID: 4 //line2
+      boardID: 5 //line2
     },
     EV4D: {
       shielding: {
