@@ -538,7 +538,34 @@ function driverEff(boardType,mA,ul) {
     if (mA < 200) {driverEff = .612;}
     if (mA < 100) {driverEff = .572;}
 
-  } else if (boardType > 3) { //line2
+  } else if (boardType === 5) { //bar, line, area
+    if (mA > 2300) {
+      mA = mA / Math.ceil(ul / 85);
+    };
+
+    if (mA <= 2300) {driverEff = .889;}
+    if (mA < 1600) {driverEff = .888;}
+    if (mA < 1400) {driverEff = .885;}
+    if (mA < 1300) {driverEff = .875;}
+    if (mA < 1150) {driverEff = .879;}
+    if (mA < 1050) {driverEff = .878;}
+    if (mA < 1000) {driverEff = .879;}
+    if (mA < 950) {driverEff = .876;}
+    if (mA < 900) {driverEff = .875;}
+    if (mA < 850) {driverEff = .849;}
+    if (mA < 800) {driverEff = .87;}
+    if (mA < 750) {driverEff = .823;}
+    if (mA < 700) {driverEff = .813;}
+    if (mA < 650) {driverEff = .822;}
+    if (mA < 600) {driverEff = .829;}
+    if (mA < 550) {driverEff = .83;}
+    if (mA < 500) {driverEff = .823;}
+    if (mA < 450) {driverEff = .802;}
+    if (mA < 400) {driverEff = .793;}
+    if (mA < 350) {driverEff = .775;}
+    if (mA < 250) {driverEff = .683;}
+    if (mA < 150) {driverEff = .565;}
+  } else if (boardType === 4) { //line2
     if (mA > 2300) {
       mA = mA / Math.ceil(mA/2300);
     };
@@ -621,3 +648,26 @@ function driverEff(boardType,mA,ul) {
     };
   }
 })();
+
+75	149	.565
+150	249	.683
+250	349	.775
+350	399	.793
+400	449	.802
+450	499	.823
+500	549	.83
+550	599	.829
+600	649	.822
+650	699	.813
+700	749	.823
+750	799	.87
+800	849	.849
+850	899	.875
+900	949	.876
+950	999	.879
+1000	1049	.878
+1050	1149	.879
+1150	1299	.875
+1300	1399	.884
+1400	1599	.888
+1600	2300	.889
