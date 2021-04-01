@@ -51,8 +51,10 @@ $('.fixture').click(function(){
   selection.fixture = $(this).attr('id');
   if (fixtures[selection.family][selection.fixture].thermalLimits !== undefined) {
     selection.dirWattAdj = typeof fixtures[selection.family][selection.fixture].wattAdj === "object" ? fixtures[selection.family][selection.fixture].wattAdj["DIR"] : fixtures[selection.family][selection.fixture].wattAdj;
-    selection.indWattAdj = fixtures[selection.family][selection.fixture].wattAdj["IND"];
     selection.dirThermLim = fixtures[selection.family][selection.fixture].thermalLimits["DIR"];
+  }
+  if (fixtures[selection.family][selection.fixture].thermalLimits !== undefined) {
+    selection.indWattAdj = fixtures[selection.family][selection.fixture].wattAdj["IND"];
     selection.indThermLim = fixtures[selection.family][selection.fixture].thermalLimits["IND"];
   }
 
@@ -430,9 +432,9 @@ $('.led').on('click','.inputSection > .clButton',function() {
     }
     $('.output' + (buttonNum - 1) + '.catolog').text(customCat);
 
-    if ((selection.fixture === 'EV3D' || selection.fixture === 'EV2D') && selection.directCustommA >= 227) {
-      $('<div class="thermalWarn"><span>!!! Driver Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
-    }
+    // if ((selection.fixture === 'EV3D' && selection.directCustommA >= 262) || (selection.fixture === 'EV2D' && selection.directCustommA >= 238)) {
+    //   $('<div class="thermalWarn"><span>!!! Driver Thermal Concerns - See Art !!!</span></div>').insertBefore('.output' + (buttonNum - 1) + '.remove');
+    // }
 
     console.log(selection, 'selection');
 

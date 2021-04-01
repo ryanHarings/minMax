@@ -401,12 +401,15 @@ const fixtures = {
         R: 0.776,
         WET: 0.596
       },
+      // thermalLimits: {
+      //   DIR: [50,262]
+      // },
       ulLimit: {
         EV3D: ulW.EV,
         EV3D: ulW.EV,
         WET: ulW.EW
       },
-      boardID: 5 //line2
+      boardID: 5 //ll
     },
     EV4D: {
       shielding: {
@@ -466,7 +469,7 @@ const fixtures = {
       ulLimit: {
         "EX3D/I": ulW.EX 
       },
-      boardID: 5 //line2
+      boardID: 5 //ll
     },
     "EX4D/I": {
       shielding: {
