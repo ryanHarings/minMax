@@ -10,7 +10,7 @@ function getMinMax(fixObj) {
         var dirMinValues = calculateOutput(getCoef(fixObj.fixture, size, color, "Lumens"), "lim", "D", fixObj.dirThermLim[0])
 
         outputObject.direct = {}
-        outputObject.direct.maxLumen = dirMaxValues[1] //* fixObj.directEff
+        outputObject.direct.maxLumen = dirMaxValues[1] * fixObj.directEff
         outputObject.direct.maxWatt = dirMaxValues[2] * fixObj.dirWattAdj
         outputObject.direct.minLumen = dirMinValues[1] * fixObj.directEff
         outputObject.direct.minWatt = dirMinValues[2] * fixObj.dirWattAdj
