@@ -203,7 +203,7 @@ const fixtures = {
         WW: ulW.EWW,
         WG: ulW.EWG
       },
-      boardID: 1 //bar,line,area
+      boardID: 4 //bar,line,area
     },
     EV6: {
       shielding: {
@@ -332,13 +332,13 @@ const fixtures = {
         R: 0.5779,
         V: 0.5749,
         WW: 0.4613,
-        WET: 0.5234
+        WET: 0.596
       },
       ulLimit: {
         EX3: ulW.EX,
         WET: ulW.EW
       },
-      boardID: 1 //bar,line,area
+      boardID: 4 //bar,line,area
     },
     EX3B: {
       shielding: {
@@ -360,18 +360,18 @@ const fixtures = {
           R: 0.5779,
           V: 0.5749,
           WW: 0.4613,
-          WET: 0.5064
+          WET: 0.582
         },
         IND: {
           O: 0.8842,
-          WET: 0.8638
+          WET: 0.914
         }
       },
       ulLimit: {
         EX3B: ulW.EX,
         WET: ulW.EWB
       },
-      boardID: 1 //bar,line,area
+      boardID: 4 //bar,line,area
     },
     EV2D: {
       shielding: {
