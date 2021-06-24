@@ -572,29 +572,32 @@ function driverEff(boardType,mA,ul) {
       mA = mA / Math.ceil(mA/2300);
     };
 
-    if (mA <= 2300) {driverEff = .873;}
-    if (mA < 1300) {driverEff = .872;}
-    if (mA < 1150) {driverEff = .872;}
-    if (mA < 1050) {driverEff = .864;}
-    if (mA < 1000) {driverEff = .866;}
-    if (mA < 950) {driverEff = .838;}
-    if (mA < 900) {driverEff = .834;}
-    if (mA < 850) {driverEff = .831;}
-    if (mA < 800) {driverEff = .833;}
-    if (mA < 750) {driverEff = .828;}
-    if (mA < 700) {driverEff = .821;}
-    if (mA < 650) {driverEff = .814;}
-    if (mA < 600) {driverEff = .804;}
-    if (mA < 550) {driverEff = .814;}
-    if (mA < 525) {driverEff = .805;}
-    if (mA < 479) {driverEff = .799;}
+    if (mA <= 2300) {driverEff = .889;}
+    if (mA < 1600) {driverEff = .888;}
+    if (mA < 1400) {driverEff = .885;}
+    if (mA < 1300) {driverEff = .875;}
+    if (mA < 1150) {driverEff = .879;}
+    if (mA < 1050) {driverEff = .878;}
+    if (mA < 1000) {driverEff = .879;}
+    if (mA < 950) {driverEff = .876;}
+    if (mA < 900) {driverEff = .875;}
+    if (mA < 850) {driverEff = .849;}
+    if (mA < 800) {driverEff = .87;}
+    if (mA < 750) {driverEff = .823;}
+    if (mA < 700) {driverEff = .823;}
+    if (mA < 650) {driverEff = .822;}
+    if (mA < 600) {driverEff = .829;}
+    if (mA < 550) {driverEff = .83;}
+    if (mA < 525) {driverEff = .83;}
+    if (mA < 500) {driverEff = .802;}
+    if (mA < 479) {driverEff = .802;}
     if (mA < 470) {driverEff = .802;}
-    if (mA < 461) {driverEff = .796;}
-    if (mA < 450) {driverEff = .791;}
-    if (mA < 400) {driverEff = .773;}
-    if (mA < 350) {driverEff = .759;}
-    if (mA < 250) {driverEff = .678;}
-    if (mA < 150) {driverEff = .527;}
+    if (mA < 461) {driverEff = .802;}
+    if (mA < 450) {driverEff = .802;}
+    if (mA < 400) {driverEff = .793;}
+    if (mA < 350) {driverEff = .775;}
+    if (mA < 250) {driverEff = .683;}
+    if (mA < 150) {driverEff = .565;}
   }
   return driverEff;
 };
