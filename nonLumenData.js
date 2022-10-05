@@ -1154,7 +1154,8 @@ const fixtures = {
         IND: 12
       },
       thermalLimits: {
-        DIR: [50,500],
+        // DIR: [50,500],
+        DIR: [215,500],
         IND: [50,300]
       },
       boardID: 1 //bar,line,area
