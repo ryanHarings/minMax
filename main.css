@@ -14,6 +14,7 @@ div[id*='EX1'], div[id*='EV1'], div[id*='WET'] {
     /* -moz-user-select: none; */
     /* -ms-user-select: none; */
     /* user-select: none !important; */
+    display: block;
     color: grey;
     opacity: 0.5;
     font-size: 18px;
