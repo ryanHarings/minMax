@@ -11,6 +11,7 @@ function createList(effObject) {
     })
   })
 };
+//test
 createList(fixtures);
 // $('[id*="f"]').attr('disabled', 'true')
 
