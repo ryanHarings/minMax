@@ -77,7 +77,26 @@ const fixtures = {
       ulLimit: ulW.C,
       boardID: 4 //line2
     },
-    CD: {
+    CDR: {
+      shielding: {
+        A: 1
+      },
+      ulLimit: 10,
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      // boardCount: {
+      //   DIR: 9, //strings
+      //   IND: fixBoardCounts.F24D_IND * 3 //strings
+      // },
+      thermalLimits: {
+        DIR: [100,300],
+        IND: [30,275]
+      },
+      boardID: 1 //bar,line,area
+    },
+    CDS: {
       shielding: {
         DIR: {
           A: 1
@@ -88,7 +107,10 @@ const fixtures = {
           // BW: 0.818
         }
       },
-      ulLimit: 25,
+      ulLimit: {
+        A: 11.25,
+        ABW: 16.88
+      },
       wattAdj: {
         DIR: 1,
         IND: 1

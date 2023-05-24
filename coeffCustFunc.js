@@ -82,6 +82,7 @@ function getCoef(fixt, fixtSize, coefBoard, targetUnit) {
     var fixture = fixt.includes("F") && fixt.includes("D") ? fixt.includes("L") ? "LFD" : "FND" : fixt
     var tableName = fixture.concat(targetUnit === "Watts" ? "wattToMa" : "lumToMa")
     // select the set of coefficients
+    console.log(tableName)
 
     if (fixtSize !== "1") {
         var coefArr = [
