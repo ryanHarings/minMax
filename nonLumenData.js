@@ -1,6 +1,7 @@
 const ulW = {
   C: 20,
-  EV: 12,
+  EV: 11.9,
+  EV2D: 9.9,
   EVLL: 13,
   EX: 25,
   EXLL: 26,
@@ -90,10 +91,10 @@ const fixtures = {
       //   DIR: 9, //strings
       //   IND: fixBoardCounts.F24D_IND * 3 //strings
       // },
-      thermalLimits: {
-        DIR: [100,300],
-        IND: [30,275]
-      },
+      // thermalLimits: {
+      //   DIR: [100,300],
+      //   IND: [30,275]
+      // },
       boardID: 1 //bar,line,area
     },
     CDS: {
@@ -121,7 +122,7 @@ const fixtures = {
       // },
       thermalLimits: {
         DIR: [100,300],
-        IND: [30,275]
+        IND: [30,300]
       },
       boardID: 1 //bar,line,area
     },
@@ -409,7 +410,7 @@ const fixtures = {
         R: 0.64
       },
       ulLimit: {
-        EV2D: ulW.EVLL
+        EV2D: ulW.EV2D
       },
       boardID: 5 //ll
     },
@@ -429,7 +430,6 @@ const fixtures = {
       //   DIR: [50,262]
       // },
       ulLimit: {
-        EV3D: ulW.EV,
         EV3D: ulW.EV,
         WET: ulW.EW
       },

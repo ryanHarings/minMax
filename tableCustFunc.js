@@ -65,7 +65,7 @@ function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
         return wVar <= selObject.ulW - selObject[inverse + 'MaxWattage'];
       } else {
         if (selObject.fixture === 'EV3D' && wVar <= selObject.ulW) {
-          return Number(lumenD.mA) <= 262;
+          return Number(lumenD.mA) <= 325;
         } else if (selObject.fixture === 'EX3D/I' && wVar <= selObject.ulW) {
           if (hemi === 'direct') {
             return Number(lumenD.mA) <= 350;
@@ -76,7 +76,7 @@ function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
           if (selObject.directShielding === "R") {
             return Number(lumenD.mA) <= 194;
           } else {
-            return Number(lumenD.mA) <= 238;
+            return Number(lumenD.mA) <= 262;
           }
         } else if (selObject.fixture === 'EX2D/I' && wVar <= selObject.ulW) {
           if (hemi === 'direct') {
