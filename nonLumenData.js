@@ -189,7 +189,7 @@ const fixtures = {
     //   ulLimit: ulW.EV,
     //   boardID: 1 //bar,line,area
     // },
-    EV1: {
+    EV1D: {
       shielding: {
         A: 0.5673,
         HE: 0.6245,
@@ -261,7 +261,7 @@ const fixtures = {
       ulLimit: ulW.EVL,
       boardID: 1 //bar,line,area
     },
-    EX1: {
+    EX1D: {
       shielding: {
         A: 0.5673,
         HE: 0.6245,
@@ -273,7 +273,7 @@ const fixtures = {
       ulLimit: ulW.E1,
       boardID: 4 //now line2, was bar,line,area
     },
-    EX12: {
+    EX12D: {
       shielding: {
         DIR: {
           A: 0.5673,
@@ -690,16 +690,16 @@ const fixtures = {
     }
   },
   TRO: {
-    AD11: {
-      shielding: {
-        A: 0.6901,
-        L: 0.4099,
-        R: 0.3506
-      },
-      ulLimit: ulW.TRO11,
-      boardCount: fixBoardCounts.TRO11,
-      boardID: 1 //bar,line,area
-    },
+    // AD11: {
+    //   shielding: {
+    //     A: 0.6901,
+    //     L: 0.4099,
+    //     R: 0.3506
+    //   },
+    //   ulLimit: ulW.TRO11,
+    //   boardCount: fixBoardCounts.TRO11,
+    //   boardID: 1 //bar,line,area
+    // },
     AD14: {
       shielding: {
         A: 0.8223,

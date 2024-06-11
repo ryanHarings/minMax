@@ -1,4 +1,4 @@
-div[id*='EX1'], div[id*='EV1'], div[id*='WET'] {
+div[id*='WET'] {
     /* -webkit-user-select: none; */
     /* -khtml-user-select: none; */
     /* -moz-user-select: none; */
@@ -37,10 +37,10 @@ div[id*='EX1'], div[id*='EV1'], div[id*='WET'] {
   /* -moz-user-select: none; */
   /* -ms-user-select: none; */
   /* user-select: none !important; */
-  pointer-events: none;
+  /* pointer-events: none;
   color: grey;
   opacity: .5;
-}  */
+}  */ */
 
 /*main look*/
 
@@ -68,7 +68,7 @@ p {
 
 button {
   background-color: white;
-  color: #black;
+  color: black;
   border-color: black;
 }
 
