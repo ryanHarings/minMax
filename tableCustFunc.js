@@ -98,9 +98,9 @@ function outputFilter(wVar,lumenD,cTarget,eff,bCount,criM,hemi,selObject) {
           }
         } else if ((selObject.fixture === 'L6D/I' || selObject.fixture === 'L8D/I') && wVar <= selObject.ulW) {
           if (hemi === 'direct') {
-            return Number(lumenD.mA) <= 287;
+            return Number(lumenD.mA) <= 405;
           } else {
-            return Number(lumenD.mA) <= 285;
+            return Number(lumenD.mA) <= 405;
           }
         } else if ((selObject.fixture === 'M' || selObject.fixture === 'MW') && wVar <= selObject.ulW) {
           return Number(lumenD.mA) <= 312;

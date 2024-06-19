@@ -144,7 +144,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $('.led > article > .inputSection').hide();
 
   // if (selection.fixture === 'EX3D/I' || selection.fixture === 'EV3D') {
-  if (selection.boardID > 3) {
+  if (selection.boardID > 4) {
     if (selection.cri === '80') {
       selection.color = '8' + $(this).attr('data-temp');
     } else {
@@ -309,9 +309,10 @@ $('.led > article').on('click', '.temp > .temp',function() {
 
     // } else {
       $('article.output' + buttonNum).append('<div class="directMax"><span>Dir Max:</span> ' + selection.directMaxLumens + directInverseLumen + lumenLabel + selection.directMaxWattage + directInverseWatt + wattLabel + '</div>');
-    }
-    $('article.output' + buttonNum).append('<div class="directMin"><span>Dir Min:</span> ' + selection.directMinLumens + lumenLabel + selection.directMinWattage + wattLabel + '</div>');
-  // }
+    
+      $('article.output' + buttonNum).append('<div class="directMin"><span>Dir Min:</span> ' + selection.directMinLumens + lumenLabel + selection.directMinWattage + wattLabel + '</div>');
+  }
+      // }
   if (outputData.hasOwnProperty('indirect')) {
     if (selection.fixture.charAt(0) === 'F' && selection.fixture.match(/\d+/)[0] > 36) {
       $('article.output' + buttonNum).append('<div class="indirectMax"><span>Ind Max:</span> See spec sheet</div>');
@@ -546,28 +547,28 @@ function driverEff(boardType,mA,ul) {
       mA = mA / Math.ceil(ul / 85);
     };
 
-    if (mA <= 2300) {driverEff = .889;}
-    if (mA < 1600) {driverEff = .888;}
-    if (mA < 1400) {driverEff = .885;}
-    if (mA < 1300) {driverEff = .875;}
-    if (mA < 1150) {driverEff = .879;}
-    if (mA < 1050) {driverEff = .878;}
-    if (mA < 1000) {driverEff = .879;}
-    if (mA < 950) {driverEff = .876;}
-    if (mA < 900) {driverEff = .875;}
-    if (mA < 850) {driverEff = .849;}
-    if (mA < 800) {driverEff = .87;}
-    if (mA < 750) {driverEff = .823;}
-    if (mA < 700) {driverEff = .813;}
-    if (mA < 650) {driverEff = .822;}
-    if (mA < 600) {driverEff = .829;}
-    if (mA < 550) {driverEff = .83;}
-    if (mA < 500) {driverEff = .823;}
-    if (mA < 450) {driverEff = .802;}
-    if (mA < 400) {driverEff = .793;}
-    if (mA < 350) {driverEff = .775;}
-    if (mA < 250) {driverEff = .683;}
-    if (mA < 150) {driverEff = .565;}
+    if (mA <= 2300) {driverEff = .814;}
+    if (mA < 1600) {driverEff = .813;}
+    if (mA < 1400) {driverEff = .810;}
+    if (mA < 1300) {driverEff = .800;}
+    if (mA < 1150) {driverEff = .804;}
+    if (mA < 1050) {driverEff = .803;}
+    if (mA < 1000) {driverEff = .804;}
+    if (mA < 950) {driverEff = .801;}
+    if (mA < 900) {driverEff = .800;}
+    if (mA < 850) {driverEff = .774;}
+    if (mA < 800) {driverEff = .795;}
+    if (mA < 750) {driverEff = .748;}
+    if (mA < 700) {driverEff = .748;}
+    if (mA < 650) {driverEff = .747;}
+    if (mA < 600) {driverEff = .754;}
+    if (mA < 550) {driverEff = .755;}
+    if (mA < 500) {driverEff = .748;}
+    if (mA < 450) {driverEff = .727;}
+    if (mA < 400) {driverEff = .700;}
+    if (mA < 350) {driverEff = .700;}
+    if (mA < 250) {driverEff = .608;}
+    if (mA < 150) {driverEff = .500;}
   } else if (boardType === 4) { //line2
     if (mA > 2300) {
       mA = mA / Math.ceil(mA/2300);
@@ -602,6 +603,84 @@ function driverEff(boardType,mA,ul) {
   }
   return driverEff;
 };
+
+function parseObjectHandler(coeffArray) {
+  var coeffObject = {}
+  coeffArray.forEach(line => {
+    if ("shielding" in line) {
+
+      var lineShield = line["shielding"].replace(/\s+/g,'')
+      // var lineBoard = line["board"]
+
+      if (!coeffObject.hasOwnProperty(lineShield)) {
+        coeffObject[lineShield] = {}
+      }
+      if (!line["board"] in coeffObject[lineShield]) {
+        coeffObject[lineShield][line["board"]] = {}
+      }
+        coeffObject[lineShield][line["board"]] = {
+          aD: line["aDir"],
+          bD: line["bDir"],
+          cD: line["cDir"],
+          aI: line["aInd"],
+          bI: line["bInd"],
+          cI: line["cInd"]
+        }
+    } else if ("size" in line) {
+      if (!coeffObject.hasOwnProperty(line["size"])) {
+        coeffObject[line["size"]] = {}
+      }
+      if (!line["board"] in coeffObject[line["size"]]) {
+        coeffObject[line["size"]][lineBoard] = {}
+      }
+        coeffObject[line["size"]][line["board"]] = {
+          aD: line["aDir"],
+          bD: line["bDir"],
+          cD: line["cDir"],
+          aI: line["aInd"],
+          bI: line["bInd"],
+          cI: line["cInd"]
+        }
+      } else {
+        coeffObject[line["board"]] = {
+          aD: line["aDir"],
+          bD: line["bDir"],
+          cD: line["cDir"],
+          aI: line["aInd"],
+          bI: line["bInd"],
+          cI: line["cInd"]
+      }
+    }
+  })
+  console.log(coeffObject)
+  return coeffObject
+};
+
+// function parseObjectHandler(coeffArray) {
+//   console.log(coeffArray[0])
+//   var coeffObject = {}
+//   coeffArray.forEach(line => {
+//       if (!coeffObject.hasOwnProperty(line["size"])) {
+//           coeffObject[line["size"]] = {}
+//           // [line["board"]] = {
+//               // aD: line["aDir"]
+//           // }
+//           // console.log(coeffObject)
+//       } else {
+//           coeffObject[line["size"]][line["board"]] = {}
+//       }
+//       coeffObject[line["size"]][line["board"]] = {
+//           aD: line["aDir"],
+//           bD: line["bDir"],
+//           cD: line["cDir"],
+//           aI: line["aInd"],
+//           bI: line["bInd"],
+//           cI: line["cInd"]
+//       }
+//   })
+
+//   return coeffObject
+// };
 
 (function() {
   /**

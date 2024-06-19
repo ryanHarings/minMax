@@ -1,21 +1,31 @@
 const ulW = {
   C: 20,
+  CU1: 18.5,
+  CU3: 18.5,
   EV: 11.9,
   EV2D: 9.9,
+  EV3D: 12.7,
+  EV4D: 12.7,
   EVLL: 13,
   EX: 25,
   EXLL: 26,
-  E1: 9.25,
+  EV1D: 9.3,
+  EX1D: 25,
+  EX2D: 25.4,
+  EX3D: 25,
+  EX4D: 25.4,
   EW: 10,
   EWB: 20,
   EWG: 12.5,
   EWW: 10,
   EX1B: 18,
-  EX12: 18,
+  EX12: 9,
   EVL: 10,
   EXXX: 12.5,
-  L6: 25,
-  L8: 25,
+  L6: 26.2,
+  L8: 26.2,
+  V3: 16.5,
+  V4: 16.5,
   F14: 25,
   F18: 36,
   F24: 71,
@@ -126,6 +136,50 @@ const fixtures = {
       },
       boardID: 1 //bar,line,area
     },
+    CU1: {
+      shielding: {
+        DIR: {
+          A: 1,
+          BW: 1
+        },
+        IND: {
+          A: 1,
+          BW: 1
+        }
+      },
+      ulLimit: ulW.CU1,
+      thermalLimits: {
+        DIR: [50,450],
+        IND: [50,450]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
+    },
+    CU3: {
+      shielding: {
+        DIR: {
+          A: 1,
+          BW: 1
+        },
+        IND: {
+          A: 1,
+          BW: 1
+        }
+      },
+      ulLimit: ulW.CU1,
+      thermalLimits: {
+        DIR: [100,450],
+        IND: [100,450]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
+    },
     // E2: {
     //   shielding: {
     //     A:	0.5365
@@ -191,14 +245,20 @@ const fixtures = {
     // },
     EV1D: {
       shielding: {
-        A: 0.5673,
-        HE: 0.6245,
-        HED: 0.5721,
-        BW: 0.4956,
-        P: 0.4138,
-        WHE: 0.5541
+        A: 1,
+        HE: 1,
+        HED: 1,
+        BW: 1,
+        P: 1,
+        WHE: 1
       },
-      ulLimit: ulW.E1,
+      ulLimit: ulW.EV1D,
+      thermalLimits: {
+        DIR: [30,250]
+      },
+      wattAdj: {
+        DIR: 1
+      },
       boardID: 4 //now line2, was bar,line,area
     },
     EV3: {
@@ -220,7 +280,7 @@ const fixtures = {
         // R: 0.5779,
         // V: 0.5749,
         WG: 0.43,
-        WW: 0.4613,
+        // WW: 0.4613,
         WET: 0.596
       },
       ulLimit: {
@@ -261,59 +321,83 @@ const fixtures = {
       ulLimit: ulW.EVL,
       boardID: 1 //bar,line,area
     },
-    EX1D: {
-      shielding: {
-        A: 0.5673,
-        HE: 0.6245,
-        HED: 0.5721,
-        BW: 0.4956,
-        P: 0.4138,
-        WHE: 0.5541
-      },
-      ulLimit: ulW.E1,
-      boardID: 4 //now line2, was bar,line,area
-    },
-    EX12D: {
+    "EX1D/I": {
       shielding: {
         DIR: {
-          A: 0.5673,
-          HE: 0.6245,
-          HED: 0.5721,
-          BW: 0.4956,
-          P: 0.4138,
-          WHE: 0.5541
+          A: 1,
+          BW: 1,
+          HE: 1,
+          HED: 1,
+          WHE: 1,
+          P: 1
+        },
+        IND: {
+          BW: 1,
+          HE: 1,
+          WHE: 1,
+          HEA: 1
+        }
+      },
+      ulLimit: ulW.EX1D,
+      thermalLimits: {
+        DIR: [30,388],
+        IND: [30,388]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
+    },
+    "EX12D/I": {
+      shielding: {
+        DIR: {
+          A: 1,
+          HE: 1,
+          BW: 1,
+          WHE: 1,
+          HED: 1,
+          P: 1
         },
         IND : {
-          HE: 0.7417,
-          HEA: 0.6785,
-          BW: 0.733,
-          WHE: 0.5112
+          HE: 1,
+          BW: 1,
+          WHE: 1,
+          HEA: 1
         }
+      },
+      thermalLimits: {
+        DIR: [30,388],
+        IND: [30,405]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
       },
       ulLimit: ulW.EX12,
       boardID: 4 //bar,line,area
     },
-    EX1B: {
-      shielding: {
-        DIR: {
-          A: 0.5673,
-          HE: 0.5818,
-          HED: 0.575,
-          BW: 0.4488,
-          WHE: 0.5302,
-          P: 0.4138
-        },
-        IND: {
-          HE: 0.7143,
-          HEA: 0.6785,
-          // BW: 0.897,
-          BW: 0.733,
-          WHE: 0.5112
-        }
-      },
-      ulLimit: ulW.EX1B,
-      boardID: 4 //bar,line,area
-    },
+    // EX1B: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.5673,
+    //       HE: 0.5818,
+    //       HED: 0.575,
+    //       BW: 0.4488,
+    //       WHE: 0.5302,
+    //       P: 0.4138
+    //     },
+    //     IND: {
+    //       HE: 0.7143,
+    //       HEA: 0.6785,
+    //       // BW: 0.897,
+    //       BW: 0.733,
+    //       WHE: 0.5112
+    //     }
+    //   },
+    //   ulLimit: ulW.EX1B,
+    //   boardID: 4 //bar,line,area
+    // },
     // EX2: {
     //   shielding: {
     //     DIR: {
@@ -356,7 +440,7 @@ const fixtures = {
         // HE: 0.6441,
         // R: 0.5779,
         // V: 0.5749,
-        WW: 0.4613,
+        // WW: 0.4613,
         WET: 0.596
       },
       ulLimit: {
@@ -384,7 +468,7 @@ const fixtures = {
           // HE: 0.685,
           // R: 0.5779,
           // V: 0.5749,
-          WW: 0.4613,
+          // WW: 0.4613,
           WET: 0.582
         },
         IND: {
@@ -400,122 +484,150 @@ const fixtures = {
     },
     EV2D: {
       shielding: {
-        A: 0.684,
-        AL: 0.699,
-        HE: 0.814,
-        HED: 0.677,
-        WHE: 0.795,
-        BW: 0.789,
-        H: 0.546,
-        R: 0.64
+        A: 1,
+        AL: 1,
+        BW: 1,
+        H: 1,
+        HE: 1,
+        HED: 1,
+        R: 1,
+        WHE: 1
       },
-      ulLimit: {
-        EV2D: ulW.EV2D
+      ulLimit: ulW.EV2D,
+      thermalLimits: {
+        DIR: [30,262]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     EV3D: {
       shielding: {
-        A: 0.792,
-        AL: 0.844,
-        HE: 0.915,
-        WHE: 0.894,
-        BW: 0.864,
-        // P: 0.400,
-        H: 0.654,
-        R: 0.776
-        // WET: 0.596
+        A: 1,
+        AL: 1,
+        BW: 1,
+        H: 1,
+        HE: 1,
+        HED: 1,
+        R: 1,
+        WHE: 1,
+        WET: 1
       },
-      // thermalLimits: {
-      //   DIR: [50,262]
-      // },
-      ulLimit: {
-        EV3D: ulW.EV,
-        WET: ulW.EW
+      ulLimit: ulW.EV3D,
+      thermalLimits: {
+        DIR: [30,325]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     EV4D: {
       shielding: {
-        A: 0.757,
-        AL: 0.684,
-        HE: 0.862,
-        HED: 0.752,
-        WHE: 0.841,
-        BW: 0.84,
-        H: 0.634,
-        R: 0.674
+        A: 1,
+        AL: 1,
+        BW: 1,
+        H: 1,
+        HE: 1,
+        HED: 1,
+        R: 1,
+        WHE: 1
       },
-      ulLimit: {
-        EV4D: ulW.EVLL
+      ulLimit: ulW.EV4D,
+      thermalLimits: {
+        DIR: [30,314]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     "EX2D/I": {
       shielding: {
         DIR: {
-          A: 0.663,
-          AL: 0.676,
-          HE: 0.79,
-          HED: 0.64,
-          WHE: 0.772,
-          BW: 0.773
+          A: 1,
+          AL: 1,
+          BW: 1,
+          HE: 1,
+          HED: 1,
+          WHE: 1
         },
         IND: {
-          HE: 0.883,
-          HEA: 0.832,
-          WHE: 0.681,
-          BW: 0.831
+          BW: 1,
+          HE: 1,
+          HEA: 1,
+          WHE: 1
         }
       },
-      ulLimit: {
-        "EX2D/I": ulW.EXLL
+      ulLimit: ulW.EX2D,
+      thermalLimits: {
+        DIR: [30,350],
+        IND: [30,350]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     "EX3D/I": {
       shielding: {
         DIR: {
-          A: 0.717,
-          AL: 0.782,
-          HE: 0.846,
-          HED: 0.708,
-          WHE: 0.818,
-          BW: 0.793
+          A: 1,
+          AL: 1,
+          BW: 1,
+          HE: 1,
+          HED: 1,
+          WHE: 1,
+          WW: 1
         },
         IND: {
-          HE: 0.882,
-          HEA: 0.856,
-          WHE: 0.663,
-          BW: 0.845
+          BW: 1,
+          HE: 1,
+          HEA: 1,
+          WHE: 1
         }
       },
-      ulLimit: {
-        "EX3D/I": ulW.EX 
+      ulLimit: ulW.EX3D,
+      thermalLimits: {
+        DIR: [30,350],
+        IND: [30,350]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     "EX4D/I": {
       shielding: {
         DIR: {
-          A: 0.745,
-          AL: 0.677,
-          HE: 0.845,
-          HED: 0.753,
-          WHE: 0.834,
-          BW: 0.835
+          A: 1,
+          AL: 1,
+          BW: 1,
+          HE: 1,
+          HED: 1,
+          WHE: 1,
+          WW: 1
         },
         IND: {
-          HE: 0.908,
-          HEA: 0.867,
-          WHE: 0.714,
-          BW: 0.818
+          BW: 1,
+          HE: 1,
+          HEA: 1,
+          WHE: 1
         }
       },
-      ulLimit: {
-        "EX4D/I": ulW.EXLL
+      ulLimit: ulW.EX4D,
+      thermalLimits: {
+        DIR: [30,350],
+        IND: [30,350]
       },
-      boardID: 5 //ll
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     },
     // EX4: {
     //   shielding: {
@@ -529,30 +641,30 @@ const fixtures = {
     //   ulLimit: ulW.EX,
     //   boardID: 1 //bar,line,area
     // },
-    EX33: {
-      shielding: {
-        DIR: {
-          A: 0.545
-        },
-        IND: {
-          O: 0.8578
-        }
-      },
-      ulLimit: ulW.EXXX,
-      boardID: 1 //bar,line,area
-    },
-    EX44: {
-      shielding: {
-        DIR: {
-          A: 0.5731
-        },
-        IND: {
-          O: 0.8865
-        }
-      },
-      ulLimit: ulW.EXXX,
-      boardID: 1 //bar,line,area
-    },
+    // EX33: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.545
+    //     },
+    //     IND: {
+    //       O: 0.8578
+    //     }
+    //   },
+    //   ulLimit: ulW.EXXX,
+    //   boardID: 1 //bar,line,area
+    // },
+    // EX44: {
+    //   shielding: {
+    //     DIR: {
+    //       A: 0.5731
+    //     },
+    //     IND: {
+    //       O: 0.8865
+    //     }
+    //   },
+    //   ulLimit: ulW.EXXX,
+    //   boardID: 1 //bar,line,area
+    // },
     // EX4B: {
     //   shielding: {
     //     DIR: {
@@ -635,13 +747,13 @@ const fixtures = {
     'L6D/I': {
       shielding: {
         DIR: {
-          "40": 0.815,
+          "40": 0.904,
           "70": 0.676,
           "100": 0.673,
           A: 0.58
         },
         IND: {
-          BW: 0.836
+          BW: 0.895
         }
       },
       ulLimit: ulW.L6,
@@ -654,13 +766,13 @@ const fixtures = {
     'L8D/I': {
       shielding: {
         DIR: {
-          "40": 0.846,
+          "40": 0.912,
           "70": 0.713,
           "100": 0.749,
           A: 0.636
         },
         IND: {
-          BW: 0.866
+          BW: 0.895
         }
       },
       ulLimit: ulW.L8,
@@ -687,6 +799,48 @@ const fixtures = {
       },
       ulLimit: ulW.M,
       boardID: 5 //ll
+    },
+    V3: {
+      shielding: {
+        DIR: {
+          A: 1
+        },
+        IND: {
+          A: 1,
+          WS: 1
+        }
+      },
+      ulLimit: ulW.V3,
+      thermalLimits: {
+        DIR: [80,462],
+        IND: [80,462]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
+    },
+    V4: {
+      shielding: {
+        DIR: {
+          A: 1
+        },
+        IND: {
+          A: 1,
+          WS: 1
+        }
+      },
+      ulLimit: ulW.V4,
+      thermalLimits: {
+        DIR: [80,462],
+        IND: [80,462]
+      },
+      wattAdj: {
+        DIR: 1,
+        IND: 1
+      },
+      boardID: 4 //now line2, was bar,line,area
     }
   },
   TRO: {
@@ -1008,22 +1162,22 @@ const fixtures = {
       },
       boardID: 1 //bar,line,area
     },
-    F60: {
-      shielding: {
-        A: 0.731
-      },
-      ulLimit: ulW.F60,
-      boardCount: fixBoardCounts.F60,
-      boardID: 1 //bar,line,area
-    },
-    F72: {
-      shielding: {
-        A: 0.71
-      },
-      ulLimit: ulW.F72,
-      boardCount: fixBoardCounts.F72,
-      boardID: 1 //bar,line,area
-    },
+    // F60: {
+    //   shielding: {
+    //     A: 0.731
+    //   },
+    //   ulLimit: ulW.F60,
+    //   boardCount: fixBoardCounts.F60,
+    //   boardID: 1 //bar,line,area
+    // },
+    // F72: {
+    //   shielding: {
+    //     A: 0.71
+    //   },
+    //   ulLimit: ulW.F72,
+    //   boardCount: fixBoardCounts.F72,
+    //   boardID: 1 //bar,line,area
+    // },
     LF11D: {
       shielding: {
         A: 0.75,

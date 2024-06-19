@@ -1,13 +1,15 @@
 function getMinMax(fixObj) {
     var outputObject = {}
     
-    var size = String(fixObj.fixture.match(/\d+/) ? fixObj.fixture.match(/\d+/)[0] : 1)
+    var size = String(fixObj.family === "TRO" ? fixObj.fixture.match(/\d+/)[0] : 1)
     
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directShielding")) {
-        var dirMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, "Lumens"), "lim", "D", fixObj.dirThermLim[1])
-        var dirMinValues = calculateOutput(getCoef(fixObj.fixture, size, color, "Lumens"), "lim", "D", fixObj.dirThermLim[0])
+        var dirCoefs = getCoef(fixObj.fixture, size, color, "Lumens",fixObj.directShielding)
+
+        var dirMaxValues = calculateOutput(dirCoefs, "lim", "D", fixObj.dirThermLim[1])
+        var dirMinValues = calculateOutput(dirCoefs, "lim", "D", fixObj.dirThermLim[0])
 
         outputObject.direct = {}
         outputObject.direct.maxLumen = dirMaxValues[1] * fixObj.directEff
@@ -16,8 +18,9 @@ function getMinMax(fixObj) {
         outputObject.direct.minWatt = dirMinValues[2] * fixObj.dirWattAdj
     }
     if (fixObj.hasOwnProperty("indirectShielding")) {
-        var indMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, "Lumens"), "lim", "I", fixObj.indThermLim[1])
-        var indMinValues = calculateOutput(getCoef(fixObj.fixture, size, color, "Lumens"), "lim", "I", fixObj.indThermLim[0])
+        var indCoefs = getCoef(fixObj.fixture, size, color, "Lumens",fixObj.indirectShielding)
+        var indMaxValues = calculateOutput(indCoefs, "lim", "I", fixObj.indThermLim[1])
+        var indMinValues = calculateOutput(indCoefs, "lim", "I", fixObj.indThermLim[0])
 
         outputObject.indirect = {}
         outputObject.indirect.maxLumen = indMaxValues[1] * fixObj.indirectEff
@@ -32,11 +35,11 @@ function getMinMax(fixObj) {
 function getCustomOutput(fixObj) {
     var outputObject = {}
     
-    var size = String(fixObj.fixture.match(/\d+/) ? fixObj.fixture.match(/\d+/)[0] : 1)
+    var size = String(fixObj.fixture.match(/\d+/) && fixObj.family !== "LIN" ? fixObj.fixture.match(/\d+/)[0] : 1)
     var color = fixObj.cri.slice(0,1) + fixObj.color.slice(0,2)
 
     if (fixObj.hasOwnProperty("directTarget")) {
-        var dirMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.directTarget/fixObj.directEff, "D")
+        var dirMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit, fixObj.directShielding), fixObj.directTarget/fixObj.directEff, "D")
 
         outputObject.direct = {}
         outputObject.direct.maxLumen = dirMaxValues[1] * fixObj.directEff
@@ -45,7 +48,7 @@ function getCustomOutput(fixObj) {
 
     }
     if (fixObj.hasOwnProperty("indirectTarget")) {
-        var indMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit), fixObj.indirectTarget/fixObj.indirectEff, "I")
+        var indMaxValues = calculateOutput(getCoef(fixObj.fixture, size, color, fixObj.customUnit, fixObj.indirectShielding), fixObj.indirectTarget/fixObj.indirectEff, "I")
 
         outputObject.indirect = {}
         outputObject.indirect.maxLumen = indMaxValues[1] * fixObj.indirectEff
@@ -78,8 +81,8 @@ function calculateOutput(coeffArr, targetVal, hemisphere, limit) {
     return [mA,lumens,watts]
 }
 
-function getCoef(fixt, fixtSize, coefBoard, targetUnit) {
-    var fixture = fixt.includes("F") && fixt.includes("D") ? fixt.includes("L") ? "LFD" : "FND" : fixt
+function getCoef(fixt, fixtSize, coefBoard, targetUnit, shielding) {
+    var fixture = fixt.includes("F") && fixt.includes("D") ? fixt.includes("L") ? "LFD" : "FND" : fixt.includes("EX12") ? fixt.replace("2D/I","D") : fixt.replace("/I","")
     var tableName = fixture.concat(targetUnit === "Watts" ? "wattToMa" : "lumToMa")
     // select the set of coefficients
     console.log(tableName)
@@ -90,14 +93,25 @@ function getCoef(fixt, fixtSize, coefBoard, targetUnit) {
             eval(fixture.concat("mAToWatt"))[fixtSize][coefBoard], // mA to watt
             eval(fixture.concat("mAToLum"))[fixtSize][coefBoard] // mA to lumen (actual)
         ]
-    } else {
+    } else if (fixt === "CDS" || fixt === "CDR") {
+        console.log(eval(tableName))
         var coefArr = [
             eval(tableName)[coefBoard], // target to mA
             eval(fixture.concat("mAToWatt"))[coefBoard], // mA to watt
             eval(fixture.concat("mAToLum"))[coefBoard] // mA to lumen (actual)
         ]
+    } else {
+        console.log(fixt)
+        console.log(typeof eval(tableName))
+        console.log(coefBoard)
+
+        var coefArr = [
+            eval(tableName)[shielding][coefBoard], // target to mA
+            eval(fixture.concat("mAToWatt"))[shielding][coefBoard], // mA to watt
+            eval(fixture.concat("mAToLum"))[shielding][coefBoard] // mA to lumen (actual)
+        ]
     }
-    console.log(coefArr)
+    
     return coefArr
 }
 
