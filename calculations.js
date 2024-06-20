@@ -144,7 +144,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $('.led > article > .inputSection').hide();
 
   // if (selection.fixture === 'EX3D/I' || selection.fixture === 'EV3D') {
-  if (selection.boardID > 4) {
+  if (selection.boardID > 3 && selection.hasOwnProperty('dirThermLim') === false) {
     if (selection.cri === '80') {
       selection.color = '8' + $(this).attr('data-temp');
     } else {
@@ -158,7 +158,7 @@ $('.led > article').on('click', '.temp > .temp',function() {
   $('.inputSection > .customDirect').show();
   $('.inputSection > .customIndirect').show();
 
-  console.log(selection)
+  // console.log(selection)
 
   if (selection.dirThermLim !== undefined || selection.indThermLim !== undefined) {
     var outputData = getMinMax(selection)
@@ -652,7 +652,7 @@ function parseObjectHandler(coeffArray) {
       }
     }
   })
-  console.log(coeffObject)
+  // console.log(coeffObject)
   return coeffObject
 };
 

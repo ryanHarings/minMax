@@ -31,6 +31,7 @@ function getOutput(fixObject) {
         outputObject.direct.maxWatt = directWatts / fixObject.directBoardCount;
         outputObject.direct.mA = Number(boardDataLine.mA);
         outputObject.direct.maxBoardWatt = Number(boardDataLine.boardWattage);
+        // console.log('output', boardDataLine, fixObject.color)
       }
       if (outputFilter(indirectWatts, boardDataLine, fixObject.indirectTarget, fixObject.indirectEff, fixObject.indirectBoardCount, criMultiplier, 'indirect', fixObject)) {
         if (!outputObject.hasOwnProperty('indirect')) {
@@ -52,7 +53,7 @@ function getOutput(fixObject) {
         }
       };
     });
-    console.log(outputObject);
+    // console.log(outputObject);
     
     return outputObject;
 };

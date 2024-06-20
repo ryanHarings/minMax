@@ -85,7 +85,7 @@ function getCoef(fixt, fixtSize, coefBoard, targetUnit, shielding) {
     var fixture = fixt.includes("F") && fixt.includes("D") ? fixt.includes("L") ? "LFD" : "FND" : fixt.includes("EX12") ? fixt.replace("2D/I","D") : fixt.replace("/I","")
     var tableName = fixture.concat(targetUnit === "Watts" ? "wattToMa" : "lumToMa")
     // select the set of coefficients
-    console.log(tableName)
+    // console.log(tableName)
 
     if (fixtSize !== "1") {
         var coefArr = [
@@ -94,16 +94,16 @@ function getCoef(fixt, fixtSize, coefBoard, targetUnit, shielding) {
             eval(fixture.concat("mAToLum"))[fixtSize][coefBoard] // mA to lumen (actual)
         ]
     } else if (fixt === "CDS" || fixt === "CDR") {
-        console.log(eval(tableName))
+        // console.log(eval(tableName))
         var coefArr = [
             eval(tableName)[coefBoard], // target to mA
             eval(fixture.concat("mAToWatt"))[coefBoard], // mA to watt
             eval(fixture.concat("mAToLum"))[coefBoard] // mA to lumen (actual)
         ]
     } else {
-        console.log(fixt)
-        console.log(typeof eval(tableName))
-        console.log(coefBoard)
+        // console.log(fixt)
+        // console.log(typeof eval(tableName))
+        // console.log(coefBoard)
 
         var coefArr = [
             eval(tableName)[shielding][coefBoard], // target to mA
